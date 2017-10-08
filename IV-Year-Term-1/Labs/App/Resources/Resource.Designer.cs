@@ -125,16 +125,19 @@ namespace App
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int calc_icon = 2130837504;
+			public const int border = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int labs_launcher_cast_shedow_icon = 2130837505;
+			public const int calc_icon = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int note_icon = 2130837506;
+			public const int labs_launcher_cast_shedow_icon = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int pipette_icon = 2130837507;
+			public const int note_icon = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int pipette_icon = 2130837508;
 			
 			static Drawable()
 			{
@@ -149,26 +152,92 @@ namespace App
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080003
-			public const int blueSeekBar = 2131230723;
+			// aapt resource value: 0x7f080019
+			public const int blueSeekBar = 2131230745;
 			
-			// aapt resource value: 0x7f080005
-			public const int calculatorBtn = 2131230725;
+			// aapt resource value: 0x7f080012
+			public const int button0 = 2131230738;
+			
+			// aapt resource value: 0x7f08000e
+			public const int button1 = 2131230734;
+			
+			// aapt resource value: 0x7f08000f
+			public const int button2 = 2131230735;
+			
+			// aapt resource value: 0x7f080010
+			public const int button3 = 2131230736;
+			
+			// aapt resource value: 0x7f080009
+			public const int button4 = 2131230729;
+			
+			// aapt resource value: 0x7f08000a
+			public const int button5 = 2131230730;
+			
+			// aapt resource value: 0x7f08000b
+			public const int button6 = 2131230731;
 			
 			// aapt resource value: 0x7f080004
-			public const int colorPickerBtn = 2131230724;
+			public const int button7 = 2131230724;
 			
-			// aapt resource value: 0x7f080000
-			public const int colorTextVeiw = 2131230720;
-			
-			// aapt resource value: 0x7f080002
-			public const int greenSeekBar = 2131230722;
+			// aapt resource value: 0x7f080005
+			public const int button8 = 2131230725;
 			
 			// aapt resource value: 0x7f080006
-			public const int notesBtn = 2131230726;
+			public const int button9 = 2131230726;
+			
+			// aapt resource value: 0x7f08001b
+			public const int calculatorBtn = 2131230747;
+			
+			// aapt resource value: 0x7f080013
+			public const int clearButton = 2131230739;
+			
+			// aapt resource value: 0x7f08001a
+			public const int colorPickerBtn = 2131230746;
+			
+			// aapt resource value: 0x7f080016
+			public const int colorTextVeiw = 2131230742;
+			
+			// aapt resource value: 0x7f080000
+			public const int displayTextView = 2131230720;
+			
+			// aapt resource value: 0x7f080007
+			public const int divideButton = 2131230727;
+			
+			// aapt resource value: 0x7f080014
+			public const int equalityButton = 2131230740;
 			
 			// aapt resource value: 0x7f080001
-			public const int redSeekBar = 2131230721;
+			public const int errorTextView = 2131230721;
+			
+			// aapt resource value: 0x7f080018
+			public const int greenSeekBar = 2131230744;
+			
+			// aapt resource value: 0x7f080011
+			public const int minusButton = 2131230737;
+			
+			// aapt resource value: 0x7f08000c
+			public const int multiplyButton = 2131230732;
+			
+			// aapt resource value: 0x7f08001c
+			public const int notesBtn = 2131230748;
+			
+			// aapt resource value: 0x7f080015
+			public const int plusButton = 2131230741;
+			
+			// aapt resource value: 0x7f080017
+			public const int redSeekBar = 2131230743;
+			
+			// aapt resource value: 0x7f080002
+			public const int tableLayout1 = 2131230722;
+			
+			// aapt resource value: 0x7f080003
+			public const int tableRow1 = 2131230723;
+			
+			// aapt resource value: 0x7f080008
+			public const int tableRow2 = 2131230728;
+			
+			// aapt resource value: 0x7f08000d
+			public const int tableRow3 = 2131230733;
 			
 			static Id()
 			{
