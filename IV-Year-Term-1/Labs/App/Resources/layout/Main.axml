@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:gravity="center">
+    <Button
+        android:text="@string/color_picker_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/colorPickerBtn"
+        android:layout_margin="5.0dp"
+        android:drawableLeft="@drawable/pipette_icon" />
+    <Button
+        android:text="@string/calculator_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/calculatorBtn"
+        android:layout_margin="5.0dp"
+        android:drawableLeft="@drawable/calc_icon" />
+    <Button
+        android:text="@string/notes_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/notesBtn"
+        android:layout_margin="5.0dp"
+        android:drawableLeft="@drawable/note_icon" />
+</LinearLayout>

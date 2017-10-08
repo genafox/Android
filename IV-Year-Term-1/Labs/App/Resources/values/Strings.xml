@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Labs App</string>
+  <string name="color_picker_label">Color Picker</string>
+  <string name="calculator_label">Calculator</string>
+  <string name="notes_label">Notes</string>
+</resources>
