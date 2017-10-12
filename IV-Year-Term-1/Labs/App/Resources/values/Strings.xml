@@ -4,4 +4,6 @@
   <string name="color_picker_label">Color Picker</string>
   <string name="calculator_label">Calculator</string>
   <string name="notes_label">Notes</string>
+    <string name="search">Search</string>
+    <string name="add_note">Add Note</string>
 </resources>

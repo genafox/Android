@@ -89,6 +89,18 @@ namespace App
 			// aapt resource value: 0x7f040003
 			public const int cardview_shadow_start_color = 2130968579;
 			
+			// aapt resource value: 0x7f040004
+			public const int my_blue = 2130968580;
+			
+			// aapt resource value: 0x7f040007
+			public const int my_gray = 2130968583;
+			
+			// aapt resource value: 0x7f040005
+			public const int my_green = 2130968581;
+			
+			// aapt resource value: 0x7f040006
+			public const int my_purple = 2130968582;
+			
 			static Color()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -137,7 +149,19 @@ namespace App
 			public const int note_icon = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int pipette_icon = 2130837508;
+			public const int note_importance_high_icon = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int note_importance_low_icon = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int note_importance_medium_icon = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int noteItem_icon = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int pipette_icon = 2130837512;
 			
 			static Drawable()
 			{
@@ -152,92 +176,113 @@ namespace App
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080019
-			public const int blueSeekBar = 2131230745;
+			// aapt resource value: 0x7f090023
+			public const int add_note_action = 2131296291;
 			
-			// aapt resource value: 0x7f080012
-			public const int button0 = 2131230738;
+			// aapt resource value: 0x7f090019
+			public const int blueSeekBar = 2131296281;
 			
-			// aapt resource value: 0x7f08000e
-			public const int button1 = 2131230734;
+			// aapt resource value: 0x7f090012
+			public const int button0 = 2131296274;
 			
-			// aapt resource value: 0x7f08000f
-			public const int button2 = 2131230735;
+			// aapt resource value: 0x7f09000e
+			public const int button1 = 2131296270;
 			
-			// aapt resource value: 0x7f080010
-			public const int button3 = 2131230736;
+			// aapt resource value: 0x7f09000f
+			public const int button2 = 2131296271;
 			
-			// aapt resource value: 0x7f080009
-			public const int button4 = 2131230729;
+			// aapt resource value: 0x7f090010
+			public const int button3 = 2131296272;
 			
-			// aapt resource value: 0x7f08000a
-			public const int button5 = 2131230730;
+			// aapt resource value: 0x7f090009
+			public const int button4 = 2131296265;
 			
-			// aapt resource value: 0x7f08000b
-			public const int button6 = 2131230731;
+			// aapt resource value: 0x7f09000a
+			public const int button5 = 2131296266;
 			
-			// aapt resource value: 0x7f080004
-			public const int button7 = 2131230724;
+			// aapt resource value: 0x7f09000b
+			public const int button6 = 2131296267;
 			
-			// aapt resource value: 0x7f080005
-			public const int button8 = 2131230725;
+			// aapt resource value: 0x7f090004
+			public const int button7 = 2131296260;
 			
-			// aapt resource value: 0x7f080006
-			public const int button9 = 2131230726;
+			// aapt resource value: 0x7f090005
+			public const int button8 = 2131296261;
 			
-			// aapt resource value: 0x7f08001b
-			public const int calculatorBtn = 2131230747;
+			// aapt resource value: 0x7f090006
+			public const int button9 = 2131296262;
 			
-			// aapt resource value: 0x7f080013
-			public const int clearButton = 2131230739;
+			// aapt resource value: 0x7f09001b
+			public const int calculatorBtn = 2131296283;
 			
-			// aapt resource value: 0x7f08001a
-			public const int colorPickerBtn = 2131230746;
+			// aapt resource value: 0x7f090013
+			public const int clearButton = 2131296275;
 			
-			// aapt resource value: 0x7f080016
-			public const int colorTextVeiw = 2131230742;
+			// aapt resource value: 0x7f09001a
+			public const int colorPickerBtn = 2131296282;
 			
-			// aapt resource value: 0x7f080000
-			public const int displayTextView = 2131230720;
+			// aapt resource value: 0x7f090016
+			public const int colorTextVeiw = 2131296278;
 			
-			// aapt resource value: 0x7f080007
-			public const int divideButton = 2131230727;
+			// aapt resource value: 0x7f09001e
+			public const int creationDateTextView = 2131296286;
 			
-			// aapt resource value: 0x7f080014
-			public const int equalityButton = 2131230740;
+			// aapt resource value: 0x7f090000
+			public const int displayTextView = 2131296256;
 			
-			// aapt resource value: 0x7f080001
-			public const int errorTextView = 2131230721;
+			// aapt resource value: 0x7f090007
+			public const int divideButton = 2131296263;
 			
-			// aapt resource value: 0x7f080018
-			public const int greenSeekBar = 2131230744;
+			// aapt resource value: 0x7f090014
+			public const int equalityButton = 2131296276;
 			
-			// aapt resource value: 0x7f080011
-			public const int minusButton = 2131230737;
+			// aapt resource value: 0x7f090001
+			public const int errorTextView = 2131296257;
 			
-			// aapt resource value: 0x7f08000c
-			public const int multiplyButton = 2131230732;
+			// aapt resource value: 0x7f090018
+			public const int greenSeekBar = 2131296280;
 			
-			// aapt resource value: 0x7f08001c
-			public const int notesBtn = 2131230748;
+			// aapt resource value: 0x7f09001d
+			public const int iconImageView = 2131296285;
 			
-			// aapt resource value: 0x7f080015
-			public const int plusButton = 2131230741;
+			// aapt resource value: 0x7f090020
+			public const int importanceImageView = 2131296288;
 			
-			// aapt resource value: 0x7f080017
-			public const int redSeekBar = 2131230743;
+			// aapt resource value: 0x7f090011
+			public const int minusButton = 2131296273;
 			
-			// aapt resource value: 0x7f080002
-			public const int tableLayout1 = 2131230722;
+			// aapt resource value: 0x7f09000c
+			public const int multiplyButton = 2131296268;
 			
-			// aapt resource value: 0x7f080003
-			public const int tableRow1 = 2131230723;
+			// aapt resource value: 0x7f09001f
+			public const int nameTextView = 2131296287;
 			
-			// aapt resource value: 0x7f080008
-			public const int tableRow2 = 2131230728;
+			// aapt resource value: 0x7f09001c
+			public const int notesBtn = 2131296284;
 			
-			// aapt resource value: 0x7f08000d
-			public const int tableRow3 = 2131230733;
+			// aapt resource value: 0x7f090021
+			public const int notesListRecyclerView = 2131296289;
+			
+			// aapt resource value: 0x7f090015
+			public const int plusButton = 2131296277;
+			
+			// aapt resource value: 0x7f090017
+			public const int redSeekBar = 2131296279;
+			
+			// aapt resource value: 0x7f090022
+			public const int search_action = 2131296290;
+			
+			// aapt resource value: 0x7f090002
+			public const int tableLayout1 = 2131296258;
+			
+			// aapt resource value: 0x7f090003
+			public const int tableRow1 = 2131296259;
+			
+			// aapt resource value: 0x7f090008
+			public const int tableRow2 = 2131296264;
+			
+			// aapt resource value: 0x7f09000d
+			public const int tableRow3 = 2131296269;
 			
 			static Id()
 			{
@@ -262,7 +307,10 @@ namespace App
 			public const int Main = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int Notes = 2130903043;
+			public const int NoteItem = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int Notes = 2130903044;
 			
 			static Layout()
 			{
@@ -274,8 +322,27 @@ namespace App
 			}
 		}
 		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f080000
+			public const int action_bar = 2131230720;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
+			{
+			}
+		}
+		
 		public partial class String
 		{
+			
+			// aapt resource value: 0x7f070005
+			public const int add_note = 2131165189;
 			
 			// aapt resource value: 0x7f070000
 			public const int app_name = 2131165184;
@@ -288,6 +355,9 @@ namespace App
 			
 			// aapt resource value: 0x7f070003
 			public const int notes_label = 2131165187;
+			
+			// aapt resource value: 0x7f070004
+			public const int search = 2131165188;
 			
 			static String()
 			{
@@ -313,6 +383,12 @@ namespace App
 			
 			// aapt resource value: 0x7f060003
 			public const int CardView_Light = 2131099651;
+			
+			// aapt resource value: 0x7f060005
+			public const int CardView_MyBlue = 2131099653;
+			
+			// aapt resource value: 0x7f060004
+			public const int MyCustomTheme = 2131099652;
 			
 			static Style()
 			{
