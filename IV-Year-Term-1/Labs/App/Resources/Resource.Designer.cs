@@ -176,8 +176,8 @@ namespace App
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090023
-			public const int add_note_action = 2131296291;
+			// aapt resource value: 0x7f090028
+			public const int add_note_action = 2131296296;
 			
 			// aapt resource value: 0x7f090019
 			public const int blueSeekBar = 2131296281;
@@ -224,8 +224,23 @@ namespace App
 			// aapt resource value: 0x7f090016
 			public const int colorTextVeiw = 2131296278;
 			
+			// aapt resource value: 0x7f090024
+			public const int creationDateTextView = 2131296292;
+			
+			// aapt resource value: 0x7f090020
+			public const int detailsCreationDateTextView = 2131296288;
+			
+			// aapt resource value: 0x7f090022
+			public const int detailsDescriptionTextView = 2131296290;
+			
+			// aapt resource value: 0x7f090021
+			public const int detailsExpirationDateTextView = 2131296289;
+			
+			// aapt resource value: 0x7f09001d
+			public const int detailsImportanceImageView = 2131296285;
+			
 			// aapt resource value: 0x7f09001e
-			public const int creationDateTextView = 2131296286;
+			public const int detailsNameTextView = 2131296286;
 			
 			// aapt resource value: 0x7f090000
 			public const int displayTextView = 2131296256;
@@ -242,11 +257,11 @@ namespace App
 			// aapt resource value: 0x7f090018
 			public const int greenSeekBar = 2131296280;
 			
-			// aapt resource value: 0x7f09001d
-			public const int iconImageView = 2131296285;
+			// aapt resource value: 0x7f090023
+			public const int iconImageView = 2131296291;
 			
-			// aapt resource value: 0x7f090020
-			public const int importanceImageView = 2131296288;
+			// aapt resource value: 0x7f09001f
+			public const int importanceImageView = 2131296287;
 			
 			// aapt resource value: 0x7f090011
 			public const int minusButton = 2131296273;
@@ -254,14 +269,14 @@ namespace App
 			// aapt resource value: 0x7f09000c
 			public const int multiplyButton = 2131296268;
 			
-			// aapt resource value: 0x7f09001f
-			public const int nameTextView = 2131296287;
+			// aapt resource value: 0x7f090025
+			public const int nameTextView = 2131296293;
 			
 			// aapt resource value: 0x7f09001c
 			public const int notesBtn = 2131296284;
 			
-			// aapt resource value: 0x7f090021
-			public const int notesListRecyclerView = 2131296289;
+			// aapt resource value: 0x7f090026
+			public const int notesListRecyclerView = 2131296294;
 			
 			// aapt resource value: 0x7f090015
 			public const int plusButton = 2131296277;
@@ -269,8 +284,8 @@ namespace App
 			// aapt resource value: 0x7f090017
 			public const int redSeekBar = 2131296279;
 			
-			// aapt resource value: 0x7f090022
-			public const int search_action = 2131296290;
+			// aapt resource value: 0x7f090027
+			public const int search_action = 2131296295;
 			
 			// aapt resource value: 0x7f090002
 			public const int tableLayout1 = 2131296258;
@@ -307,10 +322,13 @@ namespace App
 			public const int Main = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int NoteItem = 2130903043;
+			public const int NoteDetails = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int Notes = 2130903044;
+			public const int NoteItem = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int Notes = 2130903045;
 			
 			static Layout()
 			{
@@ -341,8 +359,8 @@ namespace App
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f070005
-			public const int add_note = 2131165189;
+			// aapt resource value: 0x7f070006
+			public const int add_note = 2131165190;
 			
 			// aapt resource value: 0x7f070000
 			public const int app_name = 2131165184;
@@ -353,11 +371,20 @@ namespace App
 			// aapt resource value: 0x7f070001
 			public const int color_picker_label = 2131165185;
 			
+			// aapt resource value: 0x7f070007
+			public const int creation_date = 2131165191;
+			
+			// aapt resource value: 0x7f070008
+			public const int expiration_date = 2131165192;
+			
+			// aapt resource value: 0x7f070004
+			public const int note_details = 2131165188;
+			
 			// aapt resource value: 0x7f070003
 			public const int notes_label = 2131165187;
 			
-			// aapt resource value: 0x7f070004
-			public const int search = 2131165188;
+			// aapt resource value: 0x7f070005
+			public const int search = 2131165189;
 			
 			static String()
 			{

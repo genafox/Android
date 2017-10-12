@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Serialization;
 using Android.App;
 using Android.OS;
+using Android.Provider;
 using App.DataBinding;
 using App.Domain.Interfaces;
 using App.Domain.Repositories;
 using Android.Support.V7.Widget;
+using Android.Util;
 using Android.Views;
+using App.Domain.Models;
+using App.Fragments;
 
 namespace App
 {

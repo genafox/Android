@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Labs App</string>
-  <string name="color_picker_label">Color Picker</string>
-  <string name="calculator_label">Calculator</string>
-  <string name="notes_label">Notes</string>
+    <string name="app_name">Labs App</string>
+    <string name="color_picker_label">Color Picker</string>
+    <string name="calculator_label">Calculator</string>
+    <string name="notes_label">Notes</string>
+    <string name="note_details">Note Details</string>
     <string name="search">Search</string>
     <string name="add_note">Add Note</string>
+    <string name="creation_date">Creation Date:</string>
+    <string name="expiration_date">Expiration Date:</string>
 </resources>
