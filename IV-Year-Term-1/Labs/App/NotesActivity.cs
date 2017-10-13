@@ -15,50 +15,61 @@ using App.Fragments;
 
 namespace App
 {
-    [Activity(Label = "@string/notes_label", MainLauncher = false)]
-    public class NotesActivity : Activity
-    {
-        private INoteRepository noteRepository;
+	[Activity(Label = "@string/notes_label", MainLauncher = false)]
+	public class NotesActivity : Activity
+	{
+		private INoteRepository noteRepository;
 
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
+		protected override void OnCreate(Bundle savedInstanceState)
+		{
+			base.OnCreate(savedInstanceState);
 
-            this.noteRepository = new InMemoryNoteRepository();
+			this.noteRepository = new InMemoryNoteRepository();
 
-            SetContentView(Resource.Layout.Notes);
+			this.SetContentView(Resource.Layout.Notes);
 
-            // Get our RecyclerView layout:
-            var recyclerView = FindViewById<RecyclerView>(Resource.Id.notesListRecyclerView);
+			// Get our RecyclerView layout:
+			var recyclerView = this.FindViewById<RecyclerView>(Resource.Id.notesListRecyclerView);
 
-            // Instantiate the adapter and pass in its data source:
-            var adapter = new NoteAdapter(this.noteRepository.GetAll().ToArray());
-            adapter.ItemClick += OnNoteClick;
-            adapter.ItemLongClick += OnNoteLongClick;
+			// Instantiate the adapter and pass in its data source:
+			var adapter = new NoteAdapter(this.noteRepository.GetAll().ToArray());
+			adapter.ItemClick += this.OnNoteClick;
+			adapter.ItemLongClick += this.OnNoteLongClick;
 
-            // Plug the adapter into the RecyclerView:
-            recyclerView.SetAdapter(adapter);
+			// Plug the adapter into the RecyclerView:
+			recyclerView.SetAdapter(adapter);
 
-            // Instantiate the layout manager:
-            var layoutManager = new LinearLayoutManager(this);
-            recyclerView.SetLayoutManager(layoutManager);
-        }
+			// Instantiate the layout manager:
+			var layoutManager = new LinearLayoutManager(this);
+			recyclerView.SetLayoutManager(layoutManager);
+		}
 
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.action_bar, menu);
+		public override bool OnCreateOptionsMenu(IMenu menu)
+		{
+			this.MenuInflater.Inflate(Resource.Menu.action_bar, menu);
 
-            return true;
-        }
+			return true;
+		}
 
-        private void OnNoteClick(object sender, NoteAdapterClickEventArgs noteAdapterClickEventArgs)
-        {
+		private void OnNoteClick(object sender, NoteAdapterClickEventArgs eventArgs)
+		{
+			// Create a new fragment and a transaction.
+			FragmentTransaction fragmentTx = this.FragmentManager.BeginTransaction();
+			var noteDetailsFragment = NoteDetailsFragment.FromNote(eventArgs.Note);
 
-        }
+			// Replace the fragment that is in the View fragment_container (if applicable).
+			fragmentTx.Replace(Resource.Layout.);
 
-        private void OnNoteLongClick(object sender, NoteAdapterClickEventArgs noteAdapterClickEventArgs)
-        {
+			// Add the transaction to the back stack.
+			fragmentTx.AddToBackStack(null);
 
-        }
-    }
+			// Commit the transaction.
+			fragmentTx.Commit();
+		}
+
+		private void OnNoteLongClick(object sender, NoteAdapterClickEventArgs noteAdapterClickEventArgs)
+		{
+
+		}
+	}
 }
