@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Text;
-using Android.Views;
 using Android.Widget;
 
-namespace App
+namespace App.Activities
 {
     [Activity(Label = "@string/calculator_label")]
-    public class CalculatorActivity : Activity
+    public class CalculatorActivity : AppCompatActivity
     {
         private static Func<int, int, int> DefaultOperation = (o1, o2) => o1;
 
@@ -29,7 +23,7 @@ namespace App
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.Calculator);
+            SetContentView(Resource.Layout.Activity_Calculator);
 
             displayTextView = FindViewById<TextView>(Resource.Id.displayTextView);
             displayTextView.TextChanged += OnDisplayTextViewChanged;

@@ -1,12 +1,13 @@
 ﻿using Android.App;
 using Android.Graphics;
 using Android.OS;
+using Android.Support.V7.App;
 using Android.Widget;
 
-namespace App
+namespace App.Activities
 {
     [Activity(Label = "@string/color_picker_label")]
-    public class ColorPickerActivity : Activity
+    public class ColorPickerActivity : AppCompatActivity
     {
         private TextView colorTextVeiw;
         private SeekBar redSeekBar;
@@ -17,7 +18,7 @@ namespace App
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.ColorPicker);
+            SetContentView(Resource.Layout.Activity_ColorPicker);
 
             this.colorTextVeiw = FindViewById<TextView>(Resource.Id.colorTextVeiw);
             this.redSeekBar = FindViewById<SeekBar>(Resource.Id.redSeekBar);

@@ -27,7 +27,7 @@ namespace App.DataBinding
 			//Setup your layout here
 			View itemView = LayoutInflater
 				.From(parent.Context)
-				.Inflate(Resource.Layout.NoteItem, parent, false);
+				.Inflate(Resource.Layout.Layout_NoteItem, parent, false);
 
 			return new NoteAdapterViewHolder(itemView, this.OnClick, this.OnLongClick);
 		}
