@@ -10,4 +10,16 @@
     <string name="creation_date">Creation Date:</string>
     <string name="expiration_date">Expiration Date:</string>
     <string name="input_note_name">Name</string>
+    <string name="save_note">Save</string>
+    <string name="choose_note_icon_label">Image</string>
+    <string name="choose_note_dialog_title">Select a Photo</string>
+    <string name="input_note_expiration_date">Expiration Date</string>
+    <string name="input_note_description">Description</string>
+    <string name="select_note_importance">Importance</string>
+    <string name="note_importance_low">Low</string>
+    <string name="note_importance_medium">Medium</string>
+    <string name="note_importance_high">High</string>
+    <string name="max_note_name_lenght_error_message">The maximum length is {0} characters</string>
+    <string name="unique_note_name_error_message">The note with the name "{0}" already exists</string>
+    <string name="wrong_date_format_error_message">Date should be in format "DD/MM/YY hh:mm:ss"</string>
 </resources>

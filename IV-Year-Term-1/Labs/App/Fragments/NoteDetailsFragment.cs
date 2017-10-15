@@ -1,4 +1,7 @@
-﻿using Android.OS;
+﻿using System.IO;
+using Android.Graphics;
+using Android.Net;
+using Android.OS;
 using Android.Views;
 using Android.Widget;
 using App.Domain.Models;
@@ -63,6 +66,15 @@ namespace App.Fragments
                     .Text = this.noteItem.Description;
                 fragmentView.FindViewById<ImageView>(Resource.Id.detailsImportanceImageView)
                     .SetImageResource(this.noteItem.Importance.GetIconResource());
+
+                if (!string.IsNullOrEmpty(this.noteItem.IconPath))
+                {
+                    Uri iconUri = Uri.Parse(this.noteItem.IconPath);
+                    //Stream iconStream = this.Activity.ContentResolver.OpenInputStream(iconUri);
+
+                    fragmentView.FindViewById<ImageView>(Resource.Id.detailsIconImageView)
+                        .SetImageURI(iconUri);
+                }
             }
 
             return fragmentView;

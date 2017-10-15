@@ -2,4 +2,8 @@
 <resources>
     <dimen name="input_top_margin">15dp</dimen>
     <dimen name="input_start_or_end_margin">5dp</dimen>
+    <dimen name="non_text_input_group_top_margin">35dp</dimen>
+    <dimen name="non_text_input_top_margin">15dp</dimen>
+    <dimen name="non_text_input_start_or_end_margin">4dp</dimen>
+    <dimen name="max_note_icon_input_height">200dp</dimen>
 </resources>

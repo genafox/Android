@@ -20,7 +20,11 @@ namespace App.Activities
     [Activity(Label = "@string/notes_label", MainLauncher = false)]
     public class NotesActivity : AppCompatActivity
     {
+        private const int CreateNoteRequestCode = 4;
+
         private INoteRepository noteRepository;
+
+        private NoteAdapter noteAdapter;
 
         private FrameLayout fragmentContainer;
         private SupportToolbar toolbar;
@@ -45,16 +49,35 @@ namespace App.Activities
             var recyclerView = this.FindViewById<RecyclerView>(Resource.Id.notesListRecyclerView);
 
             // Instantiate the adapter and pass in its data source:
-            var adapter = new NoteAdapter(this.noteRepository.GetAll().ToArray());
-            adapter.ItemClick += this.OnNoteClick;
-            adapter.ItemLongClick += this.OnNoteLongClick;
+            this.noteAdapter = new NoteAdapter(this.noteRepository.GetAll().ToArray());
+            this.noteAdapter.ItemClick += this.OnNoteClick;
+            this.noteAdapter.ItemLongClick += this.OnNoteLongClick;
 
             // Plug the adapter into the RecyclerView:
-            recyclerView.SetAdapter(adapter);
+            recyclerView.SetAdapter(this.noteAdapter);
 
             // Instantiate the layout manager:
             var layoutManager = new LinearLayoutManager(this);
             recyclerView.SetLayoutManager(layoutManager);
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            if (resultCode == Result.Ok)
+            {
+                if (requestCode == CreateNoteRequestCode)
+                {
+                    this.HandleCreateNoteResult();
+                }
+            }
+        }
+
+        private void HandleCreateNoteResult()
+        {
+            this.noteAdapter.SetData(this.noteRepository.GetAll().ToArray());
+            this.noteAdapter.NotifyDataSetChanged();
         }
 
         private void ToolbarOnMenuItemClick(object sender, SupportToolbar.MenuItemClickEventArgs menuItemClickEventArgs)
@@ -105,7 +128,7 @@ namespace App.Activities
         private void StartAddNoteActivity()
         {
             var activity = new Intent(this, typeof(AddNoteActivity));
-            StartActivity(activity);
+            StartActivityForResult(activity, CreateNoteRequestCode);
         }
 
         private void ShowFragment(SupportFragment fragment)

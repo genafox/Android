@@ -6,9 +6,9 @@
     android:padding="8dp">
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/max_note_icon_input_height"
         android:layout_gravity="center"
-        android:id="@+id/detailsImportanceImageView"
+        android:id="@+id/detailsIconImageView"
         android:src="@drawable/noteitem_icon"
         android:scaleType="fitCenter" />
     <LinearLayout
@@ -28,8 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:id="@+id/importanceImageView"
-            android:src="@drawable/note_importance_high_icon"
+            android:id="@+id/detailsImportanceImageView"
             android:scaleType="fitCenter" />
     </LinearLayout>
     <LinearLayout
