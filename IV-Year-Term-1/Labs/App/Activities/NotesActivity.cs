@@ -11,6 +11,8 @@ using App.Domain.Interfaces;
 using App.Domain.Models;
 using App.Domain.Repositories;
 using App.Fragments;
+using AlertDialog = Android.Support.V7.App.AlertDialog;
+using PopupMenu = Android.Support.V7.Widget.PopupMenu;
 using SupportFragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 using SupportFragment = Android.Support.V4.App.Fragment;
@@ -21,6 +23,7 @@ namespace App.Activities
     public class NotesActivity : AppCompatActivity
     {
         private const int CreateNoteRequestCode = 4;
+        private const int UpdateNoteRequestCode = 5;
 
         private INoteRepository noteRepository;
 
@@ -67,14 +70,17 @@ namespace App.Activities
 
             if (resultCode == Result.Ok)
             {
-                if (requestCode == CreateNoteRequestCode)
+                switch (requestCode)
                 {
-                    this.HandleCreateNoteResult();
+                    case CreateNoteRequestCode:
+                    case UpdateNoteRequestCode:
+                        this.NotifyNotesDataChanged();
+                        break;
                 }
             }
         }
 
-        private void HandleCreateNoteResult()
+        private void NotifyNotesDataChanged()
         {
             this.noteAdapter.SetData(this.noteRepository.GetAll().ToArray());
             this.noteAdapter.NotifyDataSetChanged();
@@ -94,7 +100,7 @@ namespace App.Activities
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            this.MenuInflater.Inflate(Resource.Menu.action_bar, menu);
+            this.MenuInflater.Inflate(Resource.Menu.action_bar_menu, menu);
 
             return base.OnCreateOptionsMenu(menu);
         }
@@ -116,7 +122,21 @@ namespace App.Activities
 
         private void OnNoteLongClick(object sender, NoteAdapterClickEventArgs noteAdapterClickEventArgs)
         {
-
+            var contextMenu = new PopupMenu(this, noteAdapterClickEventArgs.ItemView);
+            contextMenu.Inflate(Resource.Menu.note_item_context_menu);
+            contextMenu.MenuItemClick += (o, args) =>
+            {
+                switch (args.Item.ItemId)
+                {
+                    case Resource.Id.edit_note_action:
+                        this.StartEditNoteActivity(noteAdapterClickEventArgs.Note);
+                        break;
+                    case Resource.Id.delete_note_action:
+                        this.StartDeleteNoteDialog(noteAdapterClickEventArgs.Note);
+                        break;
+                }
+            };
+            contextMenu.Show();
         }
 
         private void ShowNoteDetailsFragment(Note note)
@@ -127,8 +147,35 @@ namespace App.Activities
 
         private void StartAddNoteActivity()
         {
-            var activity = new Intent(this, typeof(AddNoteActivity));
+            var activity = new Intent(this, typeof(NoteConfigurationActivity));
             StartActivityForResult(activity, CreateNoteRequestCode);
+        }
+
+        private void StartEditNoteActivity(Note note)
+        {
+            Intent activity = NoteConfigurationActivity.FromNote(note, this);
+            StartActivityForResult(activity, UpdateNoteRequestCode);
+        }
+
+        private void StartDeleteNoteDialog(Note note)
+        {
+            var alertDialog = new AlertDialog.Builder(this);
+            alertDialog.SetTitle(this.GetString(Resource.String.confirm_delete_note_title));
+            alertDialog.SetMessage(string.Format(
+                this.GetString(Resource.String.confirm_delete_note_message),
+                note.Name));
+            alertDialog.SetPositiveButton(this.GetString(Resource.String.yes), (sender, args) =>
+            {
+                this.noteRepository.Delete(note.Name);
+                this.NotifyNotesDataChanged();
+                alertDialog.Dispose();
+            });
+            alertDialog.SetNegativeButton(this.GetString(Resource.String.no), (sender, args) =>
+            {
+                alertDialog.Dispose();
+            });
+
+            alertDialog.Show();
         }
 
         private void ShowFragment(SupportFragment fragment)

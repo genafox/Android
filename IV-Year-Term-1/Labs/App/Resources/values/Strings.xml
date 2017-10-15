@@ -7,6 +7,12 @@
     <string name="note_details">Note Details</string>
     <string name="search">Search</string>
     <string name="add_note">Add Note</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="delete_note">Delete Note</string>
+    <string name="confirm_delete_note_title">Confirm Delete</string>
+    <string name="confirm_delete_note_message">Are you sure that you want to delete note "{0}"?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="creation_date">Creation Date:</string>
     <string name="expiration_date">Expiration Date:</string>
     <string name="input_note_name">Name</string>
@@ -21,5 +27,6 @@
     <string name="note_importance_high">High</string>
     <string name="max_note_name_lenght_error_message">The maximum length is {0} characters</string>
     <string name="unique_note_name_error_message">The note with the name "{0}" already exists</string>
-    <string name="wrong_date_format_error_message">Date should be in format "DD/MM/YY hh:mm:ss"</string>
+    <string name="note_not_found_error_message">The note with the name "{0}" was not found</string>
+    <string name="wrong_date_format_error_message">Date should be in format "{0}"</string>
 </resources>

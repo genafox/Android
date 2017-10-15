@@ -63,6 +63,7 @@ namespace App.DataBinding
         {
             this.ItemClick?.Invoke(this, new NoteAdapterClickEventArgs
             {
+                ItemView = args.ItemView,
                 Note = this.notes[args.Position],
                 Position = args.Position
             });
@@ -72,6 +73,7 @@ namespace App.DataBinding
         {
             this.ItemLongClick?.Invoke(this, new NoteAdapterClickEventArgs
             {
+                ItemView = args.ItemView,
                 Note = this.notes[args.Position],
                 Position = args.Position
             });

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Globalization;
 using System.Linq;
 using Android.App;
 using Android.Content;
-using Android.Graphics;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
@@ -15,18 +14,21 @@ using App.Domain.Exceptions;
 using App.Domain.Interfaces;
 using App.Domain.Models;
 using App.Domain.Repositories;
+using Newtonsoft.Json;
 using Uri = Android.Net.Uri;
 
 namespace App.Activities
 {
     [Activity(Label = "@string/add_note", MainLauncher = false)]
-    public class AddNoteActivity : AppCompatActivity
+    public class NoteConfigurationActivity : AppCompatActivity
     {
+        private const string BundleNoteDataKey = "note_item_data";
+        private const string ExpirationDateFormat = "dd/MM/yy hh:mm:ss";
         private const int SelectNoteIconRequestCode = 1;
 
         private const int MaxNoteNameLength = 50;
 
-        private KeyValuePair<NoteImportance, string>[] NoteImportanceSource;
+        private KeyValuePair<NoteImportance, string>[] noteImportanceSource;
 
         private ImageView noteIconInput;
         private Spinner noteImportanceInput;
@@ -42,8 +44,19 @@ namespace App.Activities
 
         private Button saveNoteBtn;
 
+        private bool isEditState;
         private Note noteData;
         private INoteRepository noteRepository;
+
+        public static Intent FromNote(Note note, Context context)
+        {
+            var activity = new Intent(context, typeof(NoteConfigurationActivity));
+
+            string jsonNote = JsonConvert.SerializeObject(note);
+            activity.PutExtra(BundleNoteDataKey, jsonNote);
+
+            return activity;
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -52,7 +65,7 @@ namespace App.Activities
             this.noteData = new Note();
             this.noteRepository = new InMemoryNoteRepository();
 
-            this.SetContentView(Resource.Layout.Activity_AddNote);
+            this.SetContentView(Resource.Layout.Activity_NoteConfiguration);
 
             // Initialize Note Icon Input
             this.noteIconInput = this.FindViewById<ImageView>(Resource.Id.noteIconInput);
@@ -75,19 +88,19 @@ namespace App.Activities
 
             // Initialize Note Name Input
             this.noteImportanceInput = this.FindViewById<Spinner>(Resource.Id.noteImportanceInput);
-            this.NoteImportanceSource = new[]
+            this.noteImportanceSource = new[]
             {
                 new KeyValuePair<NoteImportance, string>(NoteImportance.Low,
                     GetString(Resource.String.note_importance_low)),
-                new KeyValuePair<NoteImportance, string>(NoteImportance.Low,
+                new KeyValuePair<NoteImportance, string>(NoteImportance.Medium,
                     GetString(Resource.String.note_importance_medium)),
-                new KeyValuePair<NoteImportance, string>(NoteImportance.Low,
+                new KeyValuePair<NoteImportance, string>(NoteImportance.High,
                     GetString(Resource.String.note_importance_high))
             };
             var spinnerAdapter = new ArrayAdapter<string>(
-                this, 
+                this,
                 Android.Resource.Layout.SimpleSpinnerItem,
-                this.NoteImportanceSource.Select(kvp => kvp.Value).ToArray());
+                this.noteImportanceSource.Select(kvp => kvp.Value).ToArray());
             spinnerAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             this.noteImportanceInput.Adapter = spinnerAdapter;
             this.noteImportanceInput.ItemSelected += OnNoteImportanceInputItemSelected;
@@ -95,6 +108,41 @@ namespace App.Activities
             // Initialize Save Button
             this.saveNoteBtn = this.FindViewById<Button>(Resource.Id.saveNoteBtn);
             this.saveNoteBtn.Click += OnSaveNoteBtnClick;
+
+            // If Edit - initialize Note Data
+            string jsonNoteData = this.Intent.GetStringExtra(BundleNoteDataKey);
+            this.isEditState = !string.IsNullOrEmpty(jsonNoteData);
+            if (this.isEditState)
+            {
+                this.noteData = JsonConvert.DeserializeObject<Note>(jsonNoteData);
+
+                if (!string.IsNullOrEmpty(this.noteData.IconPath))
+                {
+                    Uri iconUri = Uri.Parse(this.noteData.IconPath);
+                    this.noteIconInput.SetImageURI(iconUri);
+                }
+
+                this.noteImportanceInput.SetSelection(this.GetNoteImportanceIndex(this.noteData.Importance));
+                this.noteNameInput.Text = this.noteData.Name;
+                this.noteExpirationDateInput.Text = this.noteData.ExpirationDate.ToString(ExpirationDateFormat);
+                this.noteDescriptionInput.Text = this.noteData.Description;
+            }
+        }
+
+        private int GetNoteImportanceIndex(NoteImportance importance)
+        {
+            int index = 0;
+            foreach (KeyValuePair<NoteImportance, string> kvp in this.noteImportanceSource)
+            {
+                if (kvp.Key == importance)
+                {
+                    break;
+                }
+
+                index++;
+            }
+
+            return index;
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -146,14 +194,19 @@ namespace App.Activities
         {
             if (!focusChangeEventArgs.HasFocus)
             {
-                if (DateTime.TryParse(this.noteExpirationDateInput.Text, out DateTime expirationDate))
+                if (DateTime.TryParseExact(
+                    this.noteExpirationDateInput.Text, 
+                    ExpirationDateFormat, 
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out DateTime expirationDate))
                 {
                     this.noteData.ExpirationDate = expirationDate;
                     this.noteExpirationDateInputLayout.SetErrorEnabled(false);
                 }
                 else
                 {
-                    this.SetInputError(this.noteExpirationDateInputLayout, Resource.String.wrong_date_format_error_message);
+                    this.SetInputError(this.noteExpirationDateInputLayout, Resource.String.wrong_date_format_error_message, ExpirationDateFormat);
                 }
             }
         }
@@ -165,21 +218,30 @@ namespace App.Activities
 
         private void OnNoteImportanceInputItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
         {
-            this.noteData.Importance = this.NoteImportanceSource[itemSelectedEventArgs.Position].Key;
+            this.noteData.Importance = this.noteImportanceSource[itemSelectedEventArgs.Position].Key;
         }
 
         private void OnSaveNoteBtnClick(object sender, EventArgs eventArgs)
         {
+            Action<Note> saveNoteAction = this.noteRepository.Create;
+            if (this.isEditState)
+            {
+                saveNoteAction = this.noteRepository.Update;
+            }
+
             try
             {
-                this.noteData.CreationDate = DateTime.Now;
-                this.noteRepository.Create(this.noteData);
+                saveNoteAction(this.noteData);
                 this.SetResult(Result.Ok);
                 this.Finish();
             }
             catch (EntryAlreadyExistsException ex)
             {
-                this.SetInputError(this.noteNameInputLayout, Resource.String.unique_note_name_error_message);
+                this.SetInputError(this.noteNameInputLayout, Resource.String.unique_note_name_error_message, this.noteData.Name);
+            }
+            catch (EntryNotFoundException ex)
+            {
+                this.SetInputError(this.noteNameInputLayout, Resource.String.note_not_found_error_message, this.noteData.Name);
             }
         }
 

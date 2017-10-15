@@ -32,6 +32,7 @@ namespace App.Domain.Repositories
         {
             CheckExistance(note.Name, shouldExist: false);
 
+            note.CreationDate = DateTime.Now;
             Storage.Add(note.Name, note);
         }
 
@@ -72,11 +73,30 @@ namespace App.Domain.Repositories
                 Description = "Thid is very cool and poverfull note that is capable to concure the world!",
                 Importance = NoteImportance.High,
                 CreationDate = DateTime.Now,
-                ExpirationDate = DateTime.Now.AddDays(4),
-                IconPath = "note_importance_high_icon"
+                ExpirationDate = DateTime.Now.AddDays(4)
+            };
+
+            var note2 = new Note
+            {
+                Name = "Second Note",
+                Description = "Thid is very cool and poverfull note that is capable to concure the world! /r/n Splitted on two rows.",
+                Importance = NoteImportance.Medium,
+                CreationDate = DateTime.Now,
+                ExpirationDate = DateTime.Now.AddDays(4)
+            };
+
+            var note3 = new Note
+            {
+                Name = "Third Note",
+                Description = "Thid is very cool and poverfull note that is capable to concure the world! /r/n Splitted on three rows. /r/n With Low importance.",
+                Importance = NoteImportance.Low,
+                CreationDate = DateTime.Now,
+                ExpirationDate = DateTime.Now.AddDays(4)
             };
 
             Storage.Add(note1.Name, note1);
+            Storage.Add(note2.Name, note2);
+            Storage.Add(note3.Name, note3);
         }
     }
 }
