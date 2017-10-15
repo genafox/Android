@@ -27,4 +27,25 @@
         android:id="@+id/notesBtn"
         android:layout_margin="5.0dp"
         android:drawableLeft="@drawable/note_icon" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/non_text_input_group_top_margin"
+        android:layout_marginStart="@dimen/input_start_or_end_margin"
+        android:layout_marginEnd="@dimen/input_start_or_end_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/non_text_input_start_or_end_margin"
+        android:paddingRight="@dimen/non_text_input_start_or_end_margin">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/language"
+            android:textSize="18dp" />
+        <Spinner
+            android:spinnerMode="dialog"
+            android:layout_marginTop="@dimen/non_text_input_top_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/languageSpinner" />
+    </LinearLayout>
 </LinearLayout>

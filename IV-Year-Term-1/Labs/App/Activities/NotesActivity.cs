@@ -1,10 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Support.V4.View;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 using App.DataBinding;
 using App.Domain.Interfaces;
@@ -13,6 +18,7 @@ using App.Domain.Repositories;
 using App.Fragments;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 using PopupMenu = Android.Support.V7.Widget.PopupMenu;
+using SearchView = Android.Support.V7.Widget.SearchView;
 using SupportFragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 using SupportFragment = Android.Support.V4.App.Fragment;
@@ -25,12 +31,21 @@ namespace App.Activities
         private const int CreateNoteRequestCode = 4;
         private const int UpdateNoteRequestCode = 5;
 
+        private KeyValuePair<NoteImportance, string>[] noteImportanceSource;
+
+        // Services & Data Access
         private INoteRepository noteRepository;
 
+        // Recycler View
         private NoteAdapter noteAdapter;
 
+        // Fragments
         private FrameLayout fragmentContainer;
+
+        // Menu
         private SupportToolbar toolbar;
+        private SearchView searchView;
+        private Spinner importanceFilterSpinner;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -52,7 +67,8 @@ namespace App.Activities
             var recyclerView = this.FindViewById<RecyclerView>(Resource.Id.notesListRecyclerView);
 
             // Instantiate the adapter and pass in its data source:
-            this.noteAdapter = new NoteAdapter(this.noteRepository.GetAll().ToArray());
+            var notes = new ObservableCollection<Note>(this.noteRepository.GetAll());
+            this.noteAdapter = new NoteAdapter(notes);
             this.noteAdapter.ItemClick += this.OnNoteClick;
             this.noteAdapter.ItemLongClick += this.OnNoteLongClick;
 
@@ -80,10 +96,10 @@ namespace App.Activities
             }
         }
 
-        private void NotifyNotesDataChanged()
+        private void NotifyNotesDataChanged(Note[] notes = null)
         {
-            this.noteAdapter.SetData(this.noteRepository.GetAll().ToArray());
-            this.noteAdapter.NotifyDataSetChanged();
+            notes = notes ?? this.noteRepository.GetAll().ToArray();
+            this.noteAdapter.SetData(new ObservableCollection<Note>(notes));
         }
 
         private void ToolbarOnMenuItemClick(object sender, SupportToolbar.MenuItemClickEventArgs menuItemClickEventArgs)
@@ -102,6 +118,10 @@ namespace App.Activities
         {
             this.MenuInflater.Inflate(Resource.Menu.action_bar_menu, menu);
 
+            this.SetupMenuSearchAction(menu);
+
+            this.SetupMenuImportanceFilterAction(menu);
+
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -113,6 +133,81 @@ namespace App.Activities
             }
 
             base.OnBackPressed();
+        }
+
+        private void SetupMenuSearchAction(IMenu menu)
+        {
+            // Search action
+            IMenuItem searchItem = menu.FindItem(Resource.Id.search_action);
+            View view = MenuItemCompat.GetActionView(searchItem);
+
+            this.searchView = view as SearchView;
+            if (this.searchView != null)
+            {
+                this.searchView.QueryTextChange += (sender, args) => FilterNotes();
+
+                this.searchView.QueryTextSubmit += (sender, args) =>
+                {
+                    // Hide keyboard
+                    InputMethodManager inputManager = (InputMethodManager)this.GetSystemService(Context.InputMethodService);
+                    if (this.CurrentFocus != null)
+                    {
+                        inputManager.HideSoftInputFromWindow(this.CurrentFocus.WindowToken, HideSoftInputFlags.None);
+                    }
+
+                    // Show count of found records
+                    Toast
+                        .MakeText(
+                            this,
+                            string.Format(this.GetString(Resource.String.found_notes_count), this.noteAdapter.ItemCount),
+                            ToastLength.Short)
+                        .Show();
+
+                    args.Handled = true;
+                };
+            }
+        }
+
+        private void SetupMenuImportanceFilterAction(IMenu menu)
+        {
+            IMenuItem importanceFilterMenuItem = menu.FindItem(Resource.Id.importance_filter);
+            View view = MenuItemCompat.GetActionView(importanceFilterMenuItem);
+
+            this.importanceFilterSpinner = view as Spinner;
+            if (this.importanceFilterSpinner != null)
+            {
+                this.noteImportanceSource = new[]
+                {
+                    new KeyValuePair<NoteImportance, string>(NoteImportance.All,
+                        GetString(Resource.String.note_importance_all)),
+                    new KeyValuePair<NoteImportance, string>(NoteImportance.Low,
+                        GetString(Resource.String.note_importance_low)),
+                    new KeyValuePair<NoteImportance, string>(NoteImportance.Medium,
+                        GetString(Resource.String.note_importance_medium)),
+                    new KeyValuePair<NoteImportance, string>(NoteImportance.High,
+                        GetString(Resource.String.note_importance_high))
+                };
+                var spinnerAdapter = new ArrayAdapter<string>(
+                    this,
+                    Android.Resource.Layout.SimpleSpinnerItem,
+                    this.noteImportanceSource.Select(kvp => kvp.Value).ToArray());
+                spinnerAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+                this.importanceFilterSpinner.Adapter = spinnerAdapter;
+                this.importanceFilterSpinner.ItemSelected += (sender, args) => FilterNotes();
+            }
+        }
+
+        private void FilterNotes()
+        {
+            string nameFilter = this.searchView.Query;
+            NoteImportance importanceFilter = this.noteImportanceSource[this.importanceFilterSpinner.SelectedItemPosition].Key;
+
+            IEnumerable<Note> filtered = this.noteRepository
+                .GetAll()
+                .Where(n => 
+                    n.Name.IndexOf(nameFilter, StringComparison.InvariantCultureIgnoreCase) >= 0
+                    && importanceFilter.HasFlag(n.Importance));
+            this.noteAdapter.SetData(new ObservableCollection<Note>(filtered));
         }
 
         private void OnNoteClick(object sender, NoteAdapterClickEventArgs eventArgs)

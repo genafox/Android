@@ -1,12 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
     
     <item android:id="@+id/search_action"
           android:icon="@android:drawable/ic_menu_search"
           android:title="@string/search"
-          android:showAsAction="always"/>
+          app:showAsAction="ifRoom|collapseActionView"
+          app:actionViewClass="android.support.v7.widget.SearchView" />
+
+    <item
+        android:id="@+id/importance_filter"
+        android:title="@string/select_note_importance"
+        app:showAsAction="ifRoom" 
+        app:actionViewClass="android.widget.Spinner" />
     
     <item android:id="@+id/add_note_action"
-          android:icon="@drawable/search_icon"
-          android:title="@string/add_note" />
+          android:icon="@android:drawable/ic_menu_add"
+          android:title="@string/add_note"
+          app:showAsAction="ifRoom"/>
 </menu>

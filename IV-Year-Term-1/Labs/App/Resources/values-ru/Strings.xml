@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Лабы</string>
+    <string name="color_picker_label">Выбор Цвета</string>
+    <string name="calculator_label">Калькулятор</string>
+    <string name="notes_label">Заметки</string>
+    <string name="note_details">Детали Заметки</string>
+    <string name="search">Поиск</string>
+    <string name="add_note">Добавить Заметку</string>
+    <string name="edit_note">Изменить Заметку</string>
+    <string name="delete_note">Удалить Заметку</string>
+    <string name="confirm_delete_note_title">Подтвердите Удаление</string>
+    <string name="confirm_delete_note_message">AВы уверены, что хотите удалить заметку "{0}"?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="creation_date">Дата создания:</string>
+    <string name="expiration_date">Дата валидности:</string>
+    <string name="input_note_name">Название</string>
+    <string name="save_note">Сохранить</string>
+    <string name="choose_note_icon_label">Фото</string>
+    <string name="choose_note_dialog_title">Выберите фото</string>
+    <string name="input_note_expiration_date">Дата валидности</string>
+    <string name="input_note_description">Описание</string>
+    <string name="select_note_importance">Важность</string>
+    <string name="note_importance_low">Низкая</string>
+    <string name="note_importance_medium">Средняя</string>
+    <string name="note_importance_high">Высокая</string>
+    <string name="note_importance_all">Все</string>
+    <string name="max_note_name_lenght_error_message">Максимальный размер поля {0} символов</string>
+    <string name="unique_note_name_error_message">Заметка с именем "{0}" уже существует</string>
+    <string name="note_not_found_error_message">Заметка с именем "{0}" не найдена</string>
+    <string name="wrong_date_format_error_message">Дата должна быть в формате "{0}"</string>
+    <string name="found_notes_count">Найдено заметок: {0}</string>
+    <string name="language">Язык:</string>
+    <string name="en_language">Английский</string>
+    <string name="ru_language">Русский</string>
+</resources>

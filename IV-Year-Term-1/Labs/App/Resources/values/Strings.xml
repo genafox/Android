@@ -25,8 +25,13 @@
     <string name="note_importance_low">Low</string>
     <string name="note_importance_medium">Medium</string>
     <string name="note_importance_high">High</string>
+    <string name="note_importance_all">All</string>
     <string name="max_note_name_lenght_error_message">The maximum length is {0} characters</string>
     <string name="unique_note_name_error_message">The note with the name "{0}" already exists</string>
     <string name="note_not_found_error_message">The note with the name "{0}" was not found</string>
     <string name="wrong_date_format_error_message">Date should be in format "{0}"</string>
+    <string name="found_notes_count">Found notes: {0}</string>
+    <string name="language">Language:</string>
+    <string name="en_language">English</string>
+    <string name="ru_language">Russian</string>
 </resources>

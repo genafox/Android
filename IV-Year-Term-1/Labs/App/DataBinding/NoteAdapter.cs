@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using Android.Views;
 using Android.Support.V7.Widget;
 using App.Domain.Models;
@@ -9,17 +11,17 @@ namespace App.DataBinding
 {
     public class NoteAdapter : RecyclerView.Adapter
     {
-        private Note[] notes;
+        private ObservableCollection<Note> notes;
 
         public event EventHandler<NoteAdapterClickEventArgs> ItemClick;
         public event EventHandler<NoteAdapterClickEventArgs> ItemLongClick;
 
-        public NoteAdapter(Note[] data)
+        public NoteAdapter(ObservableCollection<Note> data)
         {
-            this.notes = data;
+            this.SetData(data);
         }
 
-        public override int ItemCount => this.notes.Length;
+        public override int ItemCount => this.notes.Count;
 
 
         // Create new views (invoked by the layout manager)
@@ -54,9 +56,11 @@ namespace App.DataBinding
             }
         }
 
-        public void SetData(Note[] notes)
+        public void SetData(ObservableCollection<Note> data)
         {
-            this.notes = notes;
+            this.notes = data;
+            this.notes.CollectionChanged += OnNotesCollectionChanged;
+            this.NotifyDataSetChanged();
         }
 
         private void OnClick(NoteViewHolderClickEventArgs args)
@@ -77,6 +81,25 @@ namespace App.DataBinding
                 Note = this.notes[args.Position],
                 Position = args.Position
             });
+        }
+
+        private void OnNotesCollectionChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
+        {
+            switch (eventArgs.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    this.NotifyItemInserted(eventArgs.NewStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    this.NotifyItemRemoved(eventArgs.OldStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    this.NotifyItemChanged(eventArgs.OldStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    this.NotifyItemMoved(eventArgs.OldStartingIndex, eventArgs.NewStartingIndex);
+                    break;
+            }
         }
     }
 }

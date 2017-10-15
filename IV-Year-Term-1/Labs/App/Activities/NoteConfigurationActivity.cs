@@ -122,27 +122,11 @@ namespace App.Activities
                     this.noteIconInput.SetImageURI(iconUri);
                 }
 
-                this.noteImportanceInput.SetSelection(this.GetNoteImportanceIndex(this.noteData.Importance));
+                this.noteImportanceInput.SetSelection(Array.FindIndex(this.noteImportanceSource, kvp => kvp.Key == this.noteData.Importance));
                 this.noteNameInput.Text = this.noteData.Name;
                 this.noteExpirationDateInput.Text = this.noteData.ExpirationDate.ToString(ExpirationDateFormat);
                 this.noteDescriptionInput.Text = this.noteData.Description;
             }
-        }
-
-        private int GetNoteImportanceIndex(NoteImportance importance)
-        {
-            int index = 0;
-            foreach (KeyValuePair<NoteImportance, string> kvp in this.noteImportanceSource)
-            {
-                if (kvp.Key == importance)
-                {
-                    break;
-                }
-
-                index++;
-            }
-
-            return index;
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)

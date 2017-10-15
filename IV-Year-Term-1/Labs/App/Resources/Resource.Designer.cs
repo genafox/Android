@@ -1701,17 +1701,14 @@ namespace App
 			// aapt resource value: 0x7f020043
 			public const int noteItem_icon = 2130837571;
 			
-			// aapt resource value: 0x7f020047
-			public const int notification_template_icon_bg = 2130837575;
+			// aapt resource value: 0x7f020046
+			public const int notification_template_icon_bg = 2130837574;
 			
 			// aapt resource value: 0x7f020044
 			public const int pipette_icon = 2130837572;
 			
 			// aapt resource value: 0x7f020045
-			public const int search_icon = 2130837573;
-			
-			// aapt resource value: 0x7f020046
-			public const int snackbar_background = 2130837574;
+			public const int snackbar_background = 2130837573;
 			
 			static Drawable()
 			{
@@ -1726,8 +1723,8 @@ namespace App
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b009b
-			public const int action0 = 2131427483;
+			// aapt resource value: 0x7f0b009c
+			public const int action0 = 2131427484;
 			
 			// aapt resource value: 0x7f0b0057
 			public const int action_bar = 2131427415;
@@ -1753,8 +1750,8 @@ namespace App
 			// aapt resource value: 0x7f0b0058
 			public const int action_context_bar = 2131427416;
 			
-			// aapt resource value: 0x7f0b009f
-			public const int action_divider = 2131427487;
+			// aapt resource value: 0x7f0b00a0
+			public const int action_divider = 2131427488;
 			
 			// aapt resource value: 0x7f0b0002
 			public const int action_menu_divider = 2131427330;
@@ -1774,8 +1771,8 @@ namespace App
 			// aapt resource value: 0x7f0b003d
 			public const int activity_chooser_view_content = 2131427389;
 			
-			// aapt resource value: 0x7f0b00a9
-			public const int add_note_action = 2131427497;
+			// aapt resource value: 0x7f0b00ab
+			public const int add_note_action = 2131427499;
 			
 			// aapt resource value: 0x7f0b0047
 			public const int alertTitle = 2131427399;
@@ -1828,8 +1825,8 @@ namespace App
 			// aapt resource value: 0x7f0b0099
 			public const int calculatorBtn = 2131427481;
 			
-			// aapt resource value: 0x7f0b009c
-			public const int cancel_action = 2131427484;
+			// aapt resource value: 0x7f0b009d
+			public const int cancel_action = 2131427485;
 			
 			// aapt resource value: 0x7f0b002b
 			public const int center = 2131427371;
@@ -1843,8 +1840,8 @@ namespace App
 			// aapt resource value: 0x7f0b004f
 			public const int checkbox = 2131427407;
 			
-			// aapt resource value: 0x7f0b00a2
-			public const int chronometer = 2131427490;
+			// aapt resource value: 0x7f0b00a3
+			public const int chronometer = 2131427491;
 			
 			// aapt resource value: 0x7f0b0079
 			public const int clearButton = 2131427449;
@@ -1882,8 +1879,8 @@ namespace App
 			// aapt resource value: 0x7f0b0040
 			public const int default_activity_button = 2131427392;
 			
-			// aapt resource value: 0x7f0b00ab
-			public const int delete_note_action = 2131427499;
+			// aapt resource value: 0x7f0b00ad
+			public const int delete_note_action = 2131427501;
 			
 			// aapt resource value: 0x7f0b008f
 			public const int detailsCreationDateTextView = 2131427471;
@@ -1918,8 +1915,8 @@ namespace App
 			// aapt resource value: 0x7f0b001d
 			public const int dropdown = 2131427357;
 			
-			// aapt resource value: 0x7f0b00aa
-			public const int edit_note_action = 2131427498;
+			// aapt resource value: 0x7f0b00ac
+			public const int edit_note_action = 2131427500;
 			
 			// aapt resource value: 0x7f0b0059
 			public const int edit_query = 2131427417;
@@ -1927,8 +1924,8 @@ namespace App
 			// aapt resource value: 0x7f0b0015
 			public const int end = 2131427349;
 			
-			// aapt resource value: 0x7f0b00a7
-			public const int end_padder = 2131427495;
+			// aapt resource value: 0x7f0b00a8
+			public const int end_padder = 2131427496;
 			
 			// aapt resource value: 0x7f0b0024
 			public const int enterAlways = 2131427364;
@@ -1990,17 +1987,23 @@ namespace App
 			// aapt resource value: 0x7f0b0095
 			public const int importanceImageView = 2131427477;
 			
-			// aapt resource value: 0x7f0b00a6
-			public const int info = 2131427494;
+			// aapt resource value: 0x7f0b00aa
+			public const int importance_filter = 2131427498;
+			
+			// aapt resource value: 0x7f0b00a7
+			public const int info = 2131427495;
+			
+			// aapt resource value: 0x7f0b009b
+			public const int languageSpinner = 2131427483;
 			
 			// aapt resource value: 0x7f0b0033
 			public const int left = 2131427379;
 			
-			// aapt resource value: 0x7f0b00a0
-			public const int line1 = 2131427488;
+			// aapt resource value: 0x7f0b00a1
+			public const int line1 = 2131427489;
 			
-			// aapt resource value: 0x7f0b00a4
-			public const int line3 = 2131427492;
+			// aapt resource value: 0x7f0b00a5
+			public const int line3 = 2131427493;
 			
 			// aapt resource value: 0x7f0b000a
 			public const int listMode = 2131427338;
@@ -2008,8 +2011,8 @@ namespace App
 			// aapt resource value: 0x7f0b0041
 			public const int list_item = 2131427393;
 			
-			// aapt resource value: 0x7f0b009e
-			public const int media_actions = 2131427486;
+			// aapt resource value: 0x7f0b009f
+			public const int media_actions = 2131427487;
 			
 			// aapt resource value: 0x7f0b0016
 			public const int middle = 2131427350;
@@ -2113,8 +2116,8 @@ namespace App
 			// aapt resource value: 0x7f0b0039
 			public const int scrollable = 2131427385;
 			
-			// aapt resource value: 0x7f0b00a8
-			public const int search_action = 2131427496;
+			// aapt resource value: 0x7f0b00a9
+			public const int search_action = 2131427497;
 			
 			// aapt resource value: 0x7f0b005b
 			public const int search_badge = 2131427419;
@@ -2182,8 +2185,8 @@ namespace App
 			// aapt resource value: 0x7f0b0035
 			public const int start = 2131427381;
 			
-			// aapt resource value: 0x7f0b009d
-			public const int status_bar_latest_event_content = 2131427485;
+			// aapt resource value: 0x7f0b009e
+			public const int status_bar_latest_event_content = 2131427486;
 			
 			// aapt resource value: 0x7f0b0062
 			public const int submit_area = 2131427426;
@@ -2203,17 +2206,17 @@ namespace App
 			// aapt resource value: 0x7f0b0073
 			public const int tableRow3 = 2131427443;
 			
-			// aapt resource value: 0x7f0b00a5
-			public const int text = 2131427493;
+			// aapt resource value: 0x7f0b00a6
+			public const int text = 2131427494;
 			
-			// aapt resource value: 0x7f0b00a3
-			public const int text2 = 2131427491;
+			// aapt resource value: 0x7f0b00a4
+			public const int text2 = 2131427492;
 			
 			// aapt resource value: 0x7f0b004a
 			public const int textSpacerNoButtons = 2131427402;
 			
-			// aapt resource value: 0x7f0b00a1
-			public const int time = 2131427489;
+			// aapt resource value: 0x7f0b00a2
+			public const int time = 2131427490;
 			
 			// aapt resource value: 0x7f0b0043
 			public const int title = 2131427395;
@@ -2567,8 +2570,14 @@ namespace App
 			// aapt resource value: 0x7f05001a
 			public const int edit_note = 2131034138;
 			
+			// aapt resource value: 0x7f050033
+			public const int en_language = 2131034163;
+			
 			// aapt resource value: 0x7f050021
 			public const int expiration_date = 2131034145;
+			
+			// aapt resource value: 0x7f050031
+			public const int found_notes_count = 2131034161;
 			
 			// aapt resource value: 0x7f050027
 			public const int input_note_description = 2131034151;
@@ -2579,14 +2588,20 @@ namespace App
 			// aapt resource value: 0x7f050022
 			public const int input_note_name = 2131034146;
 			
-			// aapt resource value: 0x7f05002c
-			public const int max_note_name_lenght_error_message = 2131034156;
+			// aapt resource value: 0x7f050032
+			public const int language = 2131034162;
+			
+			// aapt resource value: 0x7f05002d
+			public const int max_note_name_lenght_error_message = 2131034157;
 			
 			// aapt resource value: 0x7f05001f
 			public const int no = 2131034143;
 			
 			// aapt resource value: 0x7f050017
 			public const int note_details = 2131034135;
+			
+			// aapt resource value: 0x7f05002c
+			public const int note_importance_all = 2131034156;
 			
 			// aapt resource value: 0x7f05002b
 			public const int note_importance_high = 2131034155;
@@ -2597,11 +2612,14 @@ namespace App
 			// aapt resource value: 0x7f05002a
 			public const int note_importance_medium = 2131034154;
 			
-			// aapt resource value: 0x7f05002e
-			public const int note_not_found_error_message = 2131034158;
+			// aapt resource value: 0x7f05002f
+			public const int note_not_found_error_message = 2131034159;
 			
 			// aapt resource value: 0x7f050016
 			public const int notes_label = 2131034134;
+			
+			// aapt resource value: 0x7f050034
+			public const int ru_language = 2131034164;
 			
 			// aapt resource value: 0x7f050023
 			public const int save_note = 2131034147;
@@ -2615,11 +2633,11 @@ namespace App
 			// aapt resource value: 0x7f050011
 			public const int status_bar_notification_info_overflow = 2131034129;
 			
-			// aapt resource value: 0x7f05002d
-			public const int unique_note_name_error_message = 2131034157;
+			// aapt resource value: 0x7f05002e
+			public const int unique_note_name_error_message = 2131034158;
 			
-			// aapt resource value: 0x7f05002f
-			public const int wrong_date_format_error_message = 2131034159;
+			// aapt resource value: 0x7f050030
+			public const int wrong_date_format_error_message = 2131034160;
 			
 			// aapt resource value: 0x7f05001e
 			public const int yes = 2131034142;
