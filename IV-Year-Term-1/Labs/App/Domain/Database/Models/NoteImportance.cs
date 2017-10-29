@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Domain.Models
+namespace App.Domain.Database.Models
 {
     [Flags]
     public enum NoteImportance

@@ -12,10 +12,11 @@ using Android.Views;
 using Android.Widget;
 using App.Domain.Exceptions;
 using App.Domain.Interfaces;
-using App.Domain.Models;
+using App.Domain.Database.Models;
 using App.Domain.Repositories;
 using Newtonsoft.Json;
 using Uri = Android.Net.Uri;
+using App.IoC;
 
 namespace App.Activities
 {
@@ -46,6 +47,8 @@ namespace App.Activities
 
         private bool isEditState;
         private Note noteData;
+
+        private DependencyResolver dependencyResolver;
         private INoteRepository noteRepository;
 
         public static Intent FromNote(Note note, Context context)
@@ -63,7 +66,8 @@ namespace App.Activities
             base.OnCreate(savedInstanceState);
 
             this.noteData = new Note();
-            this.noteRepository = new InMemoryNoteRepository();
+            this.dependencyResolver = AppContainer.GetDependencyResolver();
+            this.noteRepository = this.dependencyResolver.Resolve<INoteRepository>();
 
             this.SetContentView(Resource.Layout.Activity_NoteConfiguration);
 
@@ -140,6 +144,12 @@ namespace App.Activities
                     this.HandleChooseIconResult(data.Data);
                 }
             }
+        }
+
+        protected override void OnDestroy()
+        {
+            this.dependencyResolver.Dispose();
+            base.OnDestroy();
         }
 
         private void OnNoteIconInputClick(object sender, EventArgs eventArgs)

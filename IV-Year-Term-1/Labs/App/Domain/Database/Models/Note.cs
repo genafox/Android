@@ -1,9 +1,15 @@
-﻿using System;
+﻿using SQLite;
+using System;
 
-namespace App.Domain.Models
+namespace App.Domain.Database.Models
 {
+    [Table(DbConstants.NotesTableName)]
     public class Note
     {
+        [PrimaryKey, AutoIncrement, Column("Id")]
+        private int Id { get; set; }
+
+        [Indexed(Name = "NoteName", Unique = true)]
         public string Name { get; set; }
 
         public string Description { get; set; }

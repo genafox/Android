@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using App.Domain.Exceptions;
 using App.Domain.Interfaces;
-using App.Domain.Models;
+using App.Domain.Database.Models;
 
 namespace App.Domain.Repositories
 {

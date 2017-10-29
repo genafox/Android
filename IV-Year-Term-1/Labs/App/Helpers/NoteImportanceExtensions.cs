@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.Widget;
-using App.Domain.Models;
+using App.Domain.Database.Models;
 using Java.Util;
 using System.Linq;
 

@@ -1,4 +1,4 @@
-﻿using App.Domain.Models;
+﻿using App.Domain.Database.Models;
 using System.Collections.Generic;
 
 namespace App.Domain.Interfaces

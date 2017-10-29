@@ -13,8 +13,7 @@ using Android.Views.InputMethods;
 using Android.Widget;
 using App.DataBinding;
 using App.Domain.Interfaces;
-using App.Domain.Models;
-using App.Domain.Repositories;
+using App.Domain.Database.Models;
 using App.Fragments;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 using PopupMenu = Android.Support.V7.Widget.PopupMenu;
@@ -22,6 +21,7 @@ using SearchView = Android.Support.V7.Widget.SearchView;
 using SupportFragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 using SupportFragment = Android.Support.V4.App.Fragment;
+using App.IoC;
 
 namespace App.Activities
 {
@@ -34,6 +34,7 @@ namespace App.Activities
         private KeyValuePair<NoteImportance, string>[] noteImportanceSource;
 
         // Services & Data Access
+        private DependencyResolver dependencyResolver;
         private INoteRepository noteRepository;
 
         // Recycler View
@@ -51,7 +52,8 @@ namespace App.Activities
         {
             base.OnCreate(savedInstanceState);
 
-            this.noteRepository = new InMemoryNoteRepository();
+            this.dependencyResolver = AppContainer.GetDependencyResolver();
+            this.noteRepository = this.dependencyResolver.Resolve<INoteRepository>();
 
             this.SetContentView(Resource.Layout.Activity_Notes);
 
@@ -94,6 +96,13 @@ namespace App.Activities
                         break;
                 }
             }
+        }
+
+        protected override void OnDestroy()
+        {
+            this.dependencyResolver.Dispose();
+
+            base.OnDestroy();
         }
 
         private void NotifyNotesDataChanged(Note[] notes = null)

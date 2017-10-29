@@ -51,9 +51,30 @@
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.2\lib\netstandard1.1\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite-net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlite-net-pcl.1.4.118\lib\netstandard1.1\SQLite-net.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.5\lib\MonoAndroid\SQLitePCLRaw.batteries_green.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.5\lib\MonoAndroid\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.5\lib\MonoAndroid\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.lib.e_sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e4ad490600e2234c, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.lib.e_sqlite3.android.1.1.5\lib\MonoAndroid\SQLitePCLRaw.lib.e_sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLitePCLRaw.provider.e_sqlite3.android.1.1.5\lib\MonoAndroid\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.IO.Compression" />
@@ -84,19 +105,27 @@
     <Compile Include="Activities\NoteConfigurationActivity.cs" />
     <Compile Include="Activities\CalculatorActivity.cs" />
     <Compile Include="Activities\ColorPickerActivity.cs" />
+    <Compile Include="Container.cs" />
     <Compile Include="DataBinding\NoteAdapter.cs" />
     <Compile Include="DataBinding\NoteAdapterClickEventArgs.cs" />
     <Compile Include="DataBinding\NoteAdapterViewHolder.cs" />
     <Compile Include="DataBinding\NoteViewHolderClickEventArgs.cs" />
+    <Compile Include="Domain\Database\Database.cs" />
+    <Compile Include="Domain\Database\DbConstants.cs" />
+    <Compile Include="Domain\Exceptions\DatabaseConnectionException.cs" />
+    <Compile Include="Domain\Exceptions\DatabaseInitializationException.cs" />
     <Compile Include="Domain\Exceptions\EntryAlreadyExistsException.cs" />
     <Compile Include="Domain\Exceptions\EntryNotFoundException.cs" />
     <Compile Include="Domain\Interfaces\INoteRepository.cs" />
     <Compile Include="Domain\Repositories\InMemoryNoteRepository.cs" />
+    <Compile Include="Domain\Repositories\SQLiteNoteRepository.cs" />
     <Compile Include="Fragments\NoteDetailsFragment.cs" />
     <Compile Include="Helpers\NoteImportanceExtensions.cs" />
+    <Compile Include="IoC\AppContainer.cs" />
+    <Compile Include="IoC\DependencyResolver.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Domain\Models\Note.cs" />
-    <Compile Include="Domain\Models\NoteImportance.cs" />
+    <Compile Include="Domain\Database\Models\Note.cs" />
+    <Compile Include="Domain\Database\Models\NoteImportance.cs" />
     <Compile Include="Activities\NotesActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -293,6 +322,7 @@
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.CardView.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

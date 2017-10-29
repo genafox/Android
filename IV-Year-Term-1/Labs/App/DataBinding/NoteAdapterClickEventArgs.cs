@@ -1,6 +1,6 @@
 ﻿using System;
 using Android.Views;
-using App.Domain.Models;
+using App.Domain.Database.Models;
 
 namespace App.DataBinding
 {

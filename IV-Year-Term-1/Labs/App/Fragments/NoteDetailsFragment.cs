@@ -4,7 +4,7 @@ using Android.Net;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using App.Domain.Models;
+using App.Domain.Database.Models;
 using App.Helpers;
 using Newtonsoft.Json;
 using SupportFragment = Android.Support.V4.App.Fragment;

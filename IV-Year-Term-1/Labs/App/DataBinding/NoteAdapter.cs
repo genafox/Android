@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Android.Views;
 using Android.Support.V7.Widget;
-using App.Domain.Models;
+using App.Domain.Database.Models;
 using App.Helpers;
 using Uri = Android.Net.Uri;
 
