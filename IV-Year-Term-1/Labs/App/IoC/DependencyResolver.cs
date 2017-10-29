@@ -9,9 +9,9 @@ namespace App.IoC
 
         private bool disposedValue = false;
 
-        public DependencyResolver(ILifetimeScope lifetimeScope)
+        public DependencyResolver()
         {
-            this.lifetimeScope = lifetimeScope;
+            this.lifetimeScope = AppContainer.Container.BeginLifetimeScope();
         }
 
         public T Resolve<T>()

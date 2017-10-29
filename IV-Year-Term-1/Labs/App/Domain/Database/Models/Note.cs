@@ -7,7 +7,7 @@ namespace App.Domain.Database.Models
     public class Note
     {
         [PrimaryKey, AutoIncrement, Column("Id")]
-        private int Id { get; set; }
+        public int Id { get; set; }
 
         [Indexed(Name = "NoteName", Unique = true)]
         public string Name { get; set; }

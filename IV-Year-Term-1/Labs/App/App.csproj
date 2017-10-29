@@ -106,6 +106,9 @@
     <Compile Include="Activities\CalculatorActivity.cs" />
     <Compile Include="Activities\ColorPickerActivity.cs" />
     <Compile Include="Container.cs" />
+    <Compile Include="ContentProvidersApi\NotesContract.cs" />
+    <Compile Include="ContentProvidersApi\NotesProvider.cs" />
+    <Compile Include="ContentProvidersApi\NotesDataSet.cs" />
     <Compile Include="DataBinding\NoteAdapter.cs" />
     <Compile Include="DataBinding\NoteAdapterClickEventArgs.cs" />
     <Compile Include="DataBinding\NoteAdapterViewHolder.cs" />
@@ -114,6 +117,7 @@
     <Compile Include="Domain\Database\DbConstants.cs" />
     <Compile Include="Domain\Exceptions\DatabaseConnectionException.cs" />
     <Compile Include="Domain\Exceptions\DatabaseInitializationException.cs" />
+    <Compile Include="Domain\Exceptions\DatabaseOperationException.cs" />
     <Compile Include="Domain\Exceptions\EntryAlreadyExistsException.cs" />
     <Compile Include="Domain\Exceptions\EntryNotFoundException.cs" />
     <Compile Include="Domain\Interfaces\INoteRepository.cs" />

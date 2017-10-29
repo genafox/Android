@@ -8,20 +8,13 @@ namespace App.IoC
 {
     public class AppContainer
     {
-        private static IContainer Container;
-
         static AppContainer()
         {
             InitDatabase();
             InitContainer();
         }
 
-        public static DependencyResolver GetDependencyResolver()
-        {
-            ILifetimeScope scope = Container.BeginLifetimeScope();
-
-            return new DependencyResolver(scope);
-        }
+        public static IContainer Container { get; set; }
 
         private static void InitDatabase()
         {
@@ -32,8 +25,12 @@ namespace App.IoC
         {
             var builder = new ContainerBuilder();
 
-            builder.Register((ctx, p) => Database.EstablishConnection()).As<SQLiteConnection>();
-            builder.RegisterType<SQLiteNoteRepository>().As<INoteRepository>();
+            builder.Register(c => Database.EstablishConnection())
+                   .As<SQLiteConnection>()
+                   .InstancePerLifetimeScope();
+            builder.RegisterType<SQLiteNoteRepository>()
+                   .As<INoteRepository>()
+                   .InstancePerLifetimeScope();
 
             Container = builder.Build();
         }

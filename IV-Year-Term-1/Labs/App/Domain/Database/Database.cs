@@ -8,18 +8,21 @@ namespace App.Domain.Database
 {
     public class Database
     {
-        private static readonly string DatabasePath;
+        private static readonly string DatabaseFullPath;
+
+        public const string Name = "NotesDB.db3";
+        public const int Version = 1;
 
         static Database()
         {
-            DatabasePath = Path.Combine(
+            DatabaseFullPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                "NotesDB.db3");
+                Name);
         }
 
         public static void Init()
         {
-            if (!File.Exists(DatabasePath))
+            if (!File.Exists(DatabaseFullPath))
             {
                 using (var connection = EstablishConnection())
                 {
@@ -37,7 +40,7 @@ namespace App.Domain.Database
 
         public static SQLiteConnection EstablishConnection(string dbPath = null)
         {
-            dbPath = dbPath ?? DatabasePath;
+            dbPath = dbPath ?? DatabaseFullPath;
 
             try
             {

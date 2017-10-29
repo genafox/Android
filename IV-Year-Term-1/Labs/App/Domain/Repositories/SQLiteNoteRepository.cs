@@ -40,22 +40,55 @@ namespace App.Domain.Repositories
         {
             note.CreationDate = DateTime.Now;
 
-            int result = this.connection.Insert(note);
-            //throw new EntryAlreadyExistsException($"Note with the name '{noteName}' already exists");
+            try
+            {
+                int result = this.connection.Insert(note);
+            }
+            catch(Exception ex)
+            {
+                if (ex.Message.Contains("Constraint"))
+                {
+                    throw new EntryAlreadyExistsException($"Note with the name '{note.Name}' already exists");
+                }
+
+                throw new DatabaseOperationException($"Cannot create note with name '{note.Name}'", ex);
+            }
         }
 
         public void Update(Note note)
         {
-            int result = this.connection.Update(note);
-            //throw new EntryNotFoundException($"Note with the name '{noteName}' was not found");
+            try
+            {
+                int result = this.connection.Update(note);
+
+                if(result == 0)
+                {
+                    throw new EntryNotFoundException($"Note with the name '{note.Name}' was not found");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DatabaseOperationException($"Cannot update note with name '{note.Name}'", ex);
+            }
         }
 
         public void Delete(string noteName)
         {
-            string command = $"DELETE FROM {DbConstants.NotesTableName} WHERE Name = {noteName}";
+            string command = $"DELETE FROM {DbConstants.NotesTableName} WHERE Name = '{noteName}'";
 
-            int result = this.connection.Execute(command);
-            //throw new EntryNotFoundException($"Note with the name '{noteName}' was not found");
+            try
+            {
+                int result = this.connection.Execute(command);
+
+                if(result == 0)
+                {
+                    throw new EntryNotFoundException($"Note with the name '{noteName}' was not found");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DatabaseOperationException($"Cannot delete note with name '{noteName}'", ex);
+            }
         }
     }
 }
