@@ -66,7 +66,7 @@ namespace App.Activities
             base.OnCreate(savedInstanceState);
 
             this.noteData = new Note();
-            this.dependencyResolver = AppContainer.GetDependencyResolver();
+            this.dependencyResolver = new DependencyResolver();
             this.noteRepository = this.dependencyResolver.Resolve<INoteRepository>();
 
             this.SetContentView(Resource.Layout.Activity_NoteConfiguration);

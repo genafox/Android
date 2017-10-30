@@ -6,7 +6,7 @@ namespace App.ContentProvidersApi
 {
     public static class NotesContract
     {
-        private static string BasePath = "notes";
+        public const string BasePath = "notes";
 
         public const string Authority = "com.xamarin.sample.NotesContentProvider";
 
@@ -16,8 +16,13 @@ namespace App.ContentProvidersApi
         public const string NotesMimeType = ContentResolver.CursorDirBaseType + "/vnd.com.xamarin.sample.Vegetables";
         public const string SingleNoteMimeType = ContentResolver.CursorItemBaseType + "/vnd.com.xamarin.sample.Vegetables";
 
+        // URIs
+        public const int GetAll = 0;
+        public const int GetOne = 1;
+
+
         // Column names
-        public const string Id = "_id";
-        public const string Name = "name";
+        public const string Id = "Id";
+        public const string Name = "Name";
     }
 }
