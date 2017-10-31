@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Appwidget;
 using Android.Content;
+using Android.Database;
 using Android.Widget;
 using System;
 
@@ -17,6 +18,7 @@ namespace NoteWidget
         {
             var self = new ComponentName(context, Java.Lang.Class.FromType(typeof(AppWidget)).Name);
             appWidgetManager.UpdateAppWidget(self, BuildRemoteViews(context, appWidgetIds));
+
         }
 
         public override void OnReceive(Context context, Intent intent)

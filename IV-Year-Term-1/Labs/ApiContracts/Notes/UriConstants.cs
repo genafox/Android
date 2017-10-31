@@ -1,10 +1,9 @@
 ﻿using Android.Content;
-using System;
 using AndroidUri = Android.Net.Uri;
 
-namespace App.ContentProvidersApi
+namespace ApiContracts.Notes
 {
-    public static class NotesContract
+    public static class UriConstants
     {
         public const string BasePath = "notes";
 
@@ -19,10 +18,5 @@ namespace App.ContentProvidersApi
         // URIs
         public const int GetAll = 0;
         public const int GetOne = 1;
-
-
-        // Column names
-        public const string Id = "Id";
-        public const string Name = "Name";
     }
 }

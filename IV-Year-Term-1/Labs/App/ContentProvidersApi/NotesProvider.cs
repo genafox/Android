@@ -1,15 +1,15 @@
-﻿using System;
-using Android.Content;
+﻿using Android.Content;
 using Android.Database;
 using AndroidUri = Android.Net.Uri;
 using App.Domain.Interfaces;
 using App.IoC;
 using Java.Lang;
 using App.Domain.Database;
+using ApiContracts;
 
 namespace App.ContentProvidersApi
 {
-    [ContentProvider(new string[] { NotesContract.Authority })]
+    [ContentProvider(new string[] { UriConstants.Authority })]
     public class NotesProvider : ContentProvider
     {
         private static readonly UriMatcher UriMatcher;
@@ -21,8 +21,8 @@ namespace App.ContentProvidersApi
         static NotesProvider()
         {
             UriMatcher = new UriMatcher(UriMatcher.NoMatch);
-            UriMatcher.AddURI(NotesContract.Authority, NotesContract.BasePath, NotesContract.GetAll);
-            UriMatcher.AddURI(NotesContract.Authority, NotesContract.BasePath + "/#", NotesContract.GetOne);
+            UriMatcher.AddURI(UriConstants.Authority, UriConstants.BasePath, UriConstants.GetAll);
+            UriMatcher.AddURI(UriConstants.Authority, UriConstants.BasePath + "/#", UriConstants.GetOne);
         }
 
         public NotesProvider()
@@ -47,10 +47,10 @@ namespace App.ContentProvidersApi
         {
             switch (UriMatcher.Match(uri))
             {
-                case NotesContract.GetAll:
-                    return NotesContract.NotesMimeType;
-                case NotesContract.GetOne:
-                    return NotesContract.SingleNoteMimeType;
+                case UriConstants.GetAll:
+                    return UriConstants.NotesMimeType;
+                case UriConstants.GetOne:
+                    return UriConstants.SingleNoteMimeType;
                 default:
                     throw new IllegalArgumentException("Unknown Uri: " + uri);
             }
@@ -60,9 +60,9 @@ namespace App.ContentProvidersApi
         {
             switch (UriMatcher.Match(uri))
             {
-                case NotesContract.GetAll:
+                case UriConstants.GetAll:
                     return GetAllNotes();
-                case NotesContract.GetOne:
+                case UriConstants.GetOne:
                     return GetNoteById(uri);
                 default:
                     throw new IllegalArgumentException("Unknown Uri: " + uri);

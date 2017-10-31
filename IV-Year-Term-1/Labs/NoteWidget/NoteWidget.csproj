@@ -55,6 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppWidget.cs" />
+    <Compile Include="DataAccess\NoteModel.cs" />
+    <Compile Include="DataAccess\NotesContentResolver.cs" />
+    <Compile Include="DataBinding\NotesListAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -99,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\volume_up_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApiContracts\ApiContracts.csproj">
+      <Project>{62fb1390-1d07-4b16-8fe0-fcaa62c50988}</Project>
+      <Name>ApiContracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
