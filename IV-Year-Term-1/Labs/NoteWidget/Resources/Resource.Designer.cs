@@ -41,6 +41,28 @@ namespace NoteWidget
 			}
 		}
 		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int dark_blue = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int dark_gray = 2131034113;
+			
+			// aapt resource value: 0x7f050002
+			public const int light_gray = 2131034114;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
+			{
+			}
+		}
+		
 		public partial class Drawable
 		{
 			
@@ -72,23 +94,23 @@ namespace NoteWidget
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060004
-			public const int addNoteIcon = 2131099652;
+			// aapt resource value: 0x7f070004
+			public const int addNoteIcon = 2131165188;
 			
-			// aapt resource value: 0x7f060000
-			public const int noteNameTextView = 2131099648;
+			// aapt resource value: 0x7f070000
+			public const int noteNameTextView = 2131165184;
 			
-			// aapt resource value: 0x7f060005
-			public const int notesListView = 2131099653;
+			// aapt resource value: 0x7f070005
+			public const int notesListView = 2131165189;
 			
-			// aapt resource value: 0x7f060002
-			public const int notesTitleTextView = 2131099650;
+			// aapt resource value: 0x7f070002
+			public const int notesTitleTextView = 2131165186;
 			
-			// aapt resource value: 0x7f060001
-			public const int syncNotesIcon = 2131099649;
+			// aapt resource value: 0x7f070001
+			public const int syncNotesIcon = 2131165185;
 			
-			// aapt resource value: 0x7f060003
-			public const int syncStatusTextView = 2131099651;
+			// aapt resource value: 0x7f070003
+			public const int syncStatusTextView = 2131165187;
 			
 			static Id()
 			{
@@ -122,20 +144,20 @@ namespace NoteWidget
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int app_name = 2131034112;
+			// aapt resource value: 0x7f060000
+			public const int app_name = 2131099648;
 			
-			// aapt resource value: 0x7f050002
-			public const int not_synced_status = 2131034114;
+			// aapt resource value: 0x7f060002
+			public const int not_synced_status = 2131099650;
 			
-			// aapt resource value: 0x7f050004
-			public const int note_id_toast_message = 2131034116;
+			// aapt resource value: 0x7f060004
+			public const int note_id_toast_message = 2131099652;
 			
-			// aapt resource value: 0x7f050001
-			public const int notes_title = 2131034113;
+			// aapt resource value: 0x7f060001
+			public const int notes_title = 2131099649;
 			
-			// aapt resource value: 0x7f050003
-			public const int synced_status = 2131034115;
+			// aapt resource value: 0x7f060003
+			public const int synced_status = 2131099651;
 			
 			static String()
 			{
