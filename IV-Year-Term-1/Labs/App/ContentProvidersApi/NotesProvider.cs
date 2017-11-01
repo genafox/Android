@@ -61,7 +61,7 @@ namespace App.ContentProvidersApi
             switch (UriMatcher.Match(uri))
             {
                 case UriConstants.GetAll:
-                    return GetAllNotes();
+                    return GetAllNotes(selection);
                 case UriConstants.GetOne:
                     return GetNoteById(uri);
                 default:
@@ -84,9 +84,9 @@ namespace App.ContentProvidersApi
             throw new UnsupportedOperationException();
         }
 
-        private ICursor GetAllNotes()
+        private ICursor GetAllNotes(string selection = null)
         {
-            string getAllQuery = $"SELECT Id, Name FROM {DbConstants.NotesTableName}";
+            string getAllQuery = $@"SELECT Id, Name FROM {DbConstants.NotesTableName} {selection ?? string.Empty}";
             ICursor data = this.dataSet.ReadableDatabase.RawQuery(getAllQuery, null);
 
             return data;

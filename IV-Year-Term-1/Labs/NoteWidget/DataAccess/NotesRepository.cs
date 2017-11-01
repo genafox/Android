@@ -3,6 +3,7 @@ using Android.Database;
 using NotesUriConstants = ApiContracts.Notes.UriConstants;
 using NotesInterfaceConstants = ApiContracts.Notes.InterfaceConstants;
 using System.Collections.Generic;
+using System;
 
 namespace NoteWidget.DataAccess
 {
@@ -21,7 +22,7 @@ namespace NoteWidget.DataAccess
             using (var cursor = context.ContentResolver.Query(
                 uri,
                 projection,
-                selection: null,
+                selection: $"WHERE ExpirationDate >= {DateTime.Now.Ticks}",
                 selectionArgs: null,
                 sortOrder: null))
             {
