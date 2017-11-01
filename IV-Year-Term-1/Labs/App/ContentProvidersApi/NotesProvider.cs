@@ -1,15 +1,15 @@
 ﻿using Android.Content;
 using Android.Database;
-using AndroidUri = Android.Net.Uri;
 using App.Domain.Interfaces;
 using App.IoC;
 using Java.Lang;
 using App.Domain.Database;
-using ApiContracts;
+using ApiContracts.Notes;
+using AndroidUri = Android.Net.Uri;
 
 namespace App.ContentProvidersApi
 {
-    [ContentProvider(new string[] { UriConstants.Authority })]
+    [ContentProvider(new string[] { UriConstants.Authority }, Enabled = true, Exported = true)]
     public class NotesProvider : ContentProvider
     {
         private static readonly UriMatcher UriMatcher;

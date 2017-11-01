@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace NoteWidget.DataAccess
 {
-    public static class NotesContentResolver
+    public static class NotesRepository
     {
         public static IList<NoteModel> Get(Context context)
         {

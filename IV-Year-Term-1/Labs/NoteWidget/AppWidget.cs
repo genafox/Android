@@ -1,9 +1,10 @@
 ﻿using Android.App;
 using Android.Appwidget;
 using Android.Content;
-using Android.Database;
 using Android.Widget;
+using NoteWidget.DataBinding;
 using System;
+using AndroidUri = Android.Net.Uri;
 
 namespace NoteWidget
 {
@@ -12,23 +13,29 @@ namespace NoteWidget
     [MetaData("android.appwidget.provider", Resource = "@xml/widget")]
     public class AppWidget : AppWidgetProvider
     {
-        private static string AnnouncementClick = "AnnouncementClickTag";
+        private const string AddNoteClick = "AddNoteClick";
+        private const string NoteItemClick = "NoteItemClick";
 
         public override void OnUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
         {
-            var self = new ComponentName(context, Java.Lang.Class.FromType(typeof(AppWidget)).Name);
-            appWidgetManager.UpdateAppWidget(self, BuildRemoteViews(context, appWidgetIds));
+            base.OnUpdate(context, appWidgetManager, appWidgetIds);
 
+            appWidgetManager.UpdateAppWidget(appWidgetIds, BuildRemoteViews(context, appWidgetIds));
+            //appWidgetManager.NotifyAppWidgetViewDataChanged(appWidgetIds, Resource.Id.notesListView);
         }
 
         public override void OnReceive(Context context, Intent intent)
         {
             base.OnReceive(context, intent);
-
-            // Check if the click is from the "Announcement" button
-            if (AnnouncementClick.Equals(intent.Action))
+            
+            if (intent.Action == NoteItemClick)
             {
-                // Open another app
+                int noteId = intent.GetIntExtra(NoteRemoteViewsFactory.NoteItemIdKey, default(int));
+                Toast.MakeText(
+                        context,
+                        string.Format(context.GetString(Resource.String.note_id_toast_message), noteId),
+                        ToastLength.Short)
+                    .Show();
             }
         }
 
@@ -36,43 +43,48 @@ namespace NoteWidget
         {
             var widgetView = new RemoteViews(context.PackageName, Resource.Layout.Widget);
 
-            SetTextViewText(widgetView);
-            RegisterClicks(context, appWidgetIds, widgetView);
+            // Setup Notes List
+            Intent listViewDataIntent = new Intent(context, typeof(NoteRemoteViewsService));
+            listViewDataIntent.SetPackage(context.PackageName);
+            listViewDataIntent.PutExtra(AppWidgetManager.ExtraAppwidgetIds, appWidgetIds);
+
+            // To make sure that the notes list adapter (NoteRemoteViewsService.NoteRemoteViewsFactory) is created per one widget
+            AndroidUri data = AndroidUri.Parse(listViewDataIntent.ToUri(IntentUriType.AndroidAppScheme));
+            listViewDataIntent.SetData(data);
+            widgetView.SetRemoteAdapter(Resource.Id.notesListView, listViewDataIntent);
+            Toast.MakeText(context, $"Toastr, Ids: {string.Join(", ", appWidgetIds)}", ToastLength.Short).Show();
+
+            // List item click intent
+            Intent listViewClickIntent = new Intent(context, typeof(AppWidget));
+            listViewClickIntent.SetAction(NoteItemClick);
+            widgetView.SetPendingIntentTemplate(
+                Resource.Id.notesListView,
+                PendingIntent.GetBroadcast(context, 0, listViewClickIntent, 0));
+
+            // Setup Sync Status
+            widgetView.SetTextViewText(
+                Resource.Id.syncStatusTextView,
+                string.Format(context.GetString(Resource.String.synced_status), DateTime.Now));
+
+            // Setup Sync Button
+            var syncBtnIntent = new Intent(context, typeof(AppWidget));
+            syncBtnIntent.SetAction(AppWidgetManager.ActionAppwidgetUpdate);
+            syncBtnIntent.PutExtra(AppWidgetManager.ExtraAppwidgetIds, appWidgetIds);
+
+            widgetView.SetOnClickPendingIntent(
+                Resource.Id.syncNotesIcon,
+                PendingIntent.GetBroadcast(context, 0, syncBtnIntent, PendingIntentFlags.UpdateCurrent));
+
+            // Setup Add Note Button
+            var addNoteBtnIntent = new Intent(context, typeof(AppWidget));
+            addNoteBtnIntent.SetAction(AddNoteClick);
+            var pendingSelfIntent = PendingIntent.GetBroadcast(context, 0, addNoteBtnIntent, 0);
+
+            widgetView.SetOnClickPendingIntent(
+                Resource.Id.addNoteIcon,
+                pendingSelfIntent);
 
             return widgetView;
-        }
-
-        private void SetTextViewText(RemoteViews widgetView)
-        {
-            widgetView.SetTextViewText(
-                Resource.Id.widgetMedium, 
-                "HelloAppWidget");
-            widgetView.SetTextViewText(
-                Resource.Id.widgetSmall,
-                string.Format("Last update: {0:H:mm:ss}", DateTime.Now));
-        }
-
-        private void RegisterClicks(Context context, int[] appWidgetIds, RemoteViews widgetView)
-        {
-            var intent = new Intent(context, typeof(AppWidget));
-            intent.SetAction(AppWidgetManager.ActionAppwidgetUpdate);
-            intent.PutExtra(AppWidgetManager.ExtraAppwidgetIds, appWidgetIds);
-
-            // Register click event for the Background
-            var piBackground = PendingIntent.GetBroadcast(context, 0, intent, PendingIntentFlags.UpdateCurrent);
-            widgetView.SetOnClickPendingIntent(
-                Resource.Id.widgetBackground, 
-                piBackground);
-            widgetView.SetOnClickPendingIntent(
-                Resource.Id.widgetAnnouncementIcon,
-                GetPendingSelfIntent(context, AnnouncementClick));
-        }
-
-        private PendingIntent GetPendingSelfIntent(Context context, string action)
-        {
-            var intent = new Intent(context, typeof(AppWidget));
-            intent.SetAction(action);
-            return PendingIntent.GetBroadcast(context, 0, intent, 0);
         }
     }
 }

@@ -8,10 +8,9 @@ namespace App.Domain.Database
 {
     public class Database
     {
-        private static readonly string DatabaseFullPath;
-
         public const string Name = "NotesDB.db3";
         public const int Version = 1;
+        public static readonly string DatabaseFullPath;
 
         static Database()
         {

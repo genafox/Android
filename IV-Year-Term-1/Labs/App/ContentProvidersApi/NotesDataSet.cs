@@ -1,5 +1,5 @@
-﻿using System;
-using Android.Content;
+﻿using Android.Content;
+using Android.Database;
 using Android.Database.Sqlite;
 using App.Domain.Database;
 
@@ -9,7 +9,7 @@ namespace App.ContentProvidersApi
     {
         public NotesDataSet(Context context) : base(
             context,
-            Database.Name,
+            Database.DatabaseFullPath,
             null, 
             Database.Version)
         {
@@ -17,12 +17,10 @@ namespace App.ContentProvidersApi
 
         public override void OnCreate(SQLiteDatabase db)
         {
-            throw new NotImplementedException();
         }
 
         public override void OnUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
         {
-            throw new NotImplementedException();
         }
     }
 }

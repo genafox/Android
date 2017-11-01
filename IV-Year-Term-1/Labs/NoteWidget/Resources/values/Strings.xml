@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Note Widget</string>
+  <string name="notes_title">Notes</string>
+  <string name="not_synced_status">Synced: Never</string>
+  <string name="synced_status">Synced: {0}</string>
+  <string name="note_id_toast_message">Note Id: {0}</string>
 </resources>

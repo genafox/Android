@@ -1,30 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/widgetBackground"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <RelativeLayout
-        android:layout_width="72dp"
-        android:layout_height="72dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/widgetAnnouncementIcon"
-            android:src="@drawable/volume_up_icon" />
-    </RelativeLayout>
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:id="@+id/syncNotesIcon"
+            android:src="@drawable/sync_icon" />
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/widgetMedium"
-            android:text="HelloAppWidget" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/widgetSmall"
-            android:text="Last refresh: 00:00" />
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textAlignment="center"
+                android:id="@+id/notesTitleTextView"
+                android:text="@string/notes_title"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textColor="@android:color/background_dark" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:id="@+id/syncStatusTextView"
+                android:text="@string/not_synced_status"
+                android:gravity="center" />
+        </LinearLayout>
+        <ImageButton
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:id="@+id/addNoteIcon"
+            android:src="@drawable/add_icon" />
     </LinearLayout>
+    <ListView
+        android:id="@+id/notesListView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
 </LinearLayout>
