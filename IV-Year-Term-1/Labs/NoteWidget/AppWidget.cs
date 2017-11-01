@@ -20,8 +20,11 @@ namespace NoteWidget
         {
             base.OnUpdate(context, appWidgetManager, appWidgetIds);
 
-            appWidgetManager.UpdateAppWidget(appWidgetIds, BuildRemoteViews(context, appWidgetIds));
-            //appWidgetManager.NotifyAppWidgetViewDataChanged(appWidgetIds, Resource.Id.notesListView);
+            foreach (int id in appWidgetIds)
+            {
+                appWidgetManager.UpdateAppWidget(id, BuildRemoteViews(context, id));
+                appWidgetManager.NotifyAppWidgetViewDataChanged(id, Resource.Id.notesListView);
+            }
         }
 
         public override void OnReceive(Context context, Intent intent)
@@ -39,20 +42,19 @@ namespace NoteWidget
             }
         }
 
-        private RemoteViews BuildRemoteViews(Context context, int[] appWidgetIds)
+        private RemoteViews BuildRemoteViews(Context context, int appWidgetId)
         {
             var widgetView = new RemoteViews(context.PackageName, Resource.Layout.Widget);
 
             // Setup Notes List
             Intent listViewDataIntent = new Intent(context, typeof(NoteRemoteViewsService));
             listViewDataIntent.SetPackage(context.PackageName);
-            listViewDataIntent.PutExtra(AppWidgetManager.ExtraAppwidgetIds, appWidgetIds);
+            listViewDataIntent.PutExtra(AppWidgetManager.ExtraAppwidgetIds, new[] { appWidgetId });
 
             // To make sure that the notes list adapter (NoteRemoteViewsService.NoteRemoteViewsFactory) is created per one widget
             AndroidUri data = AndroidUri.Parse(listViewDataIntent.ToUri(IntentUriType.AndroidAppScheme));
             listViewDataIntent.SetData(data);
             widgetView.SetRemoteAdapter(Resource.Id.notesListView, listViewDataIntent);
-            Toast.MakeText(context, $"Toastr, Ids: {string.Join(", ", appWidgetIds)}", ToastLength.Short).Show();
 
             // List item click intent
             Intent listViewClickIntent = new Intent(context, typeof(AppWidget));
@@ -69,7 +71,7 @@ namespace NoteWidget
             // Setup Sync Button
             var syncBtnIntent = new Intent(context, typeof(AppWidget));
             syncBtnIntent.SetAction(AppWidgetManager.ActionAppwidgetUpdate);
-            syncBtnIntent.PutExtra(AppWidgetManager.ExtraAppwidgetIds, appWidgetIds);
+            syncBtnIntent.PutExtra(AppWidgetManager.ExtraAppwidgetIds, new[] { appWidgetId });
 
             widgetView.SetOnClickPendingIntent(
                 Resource.Id.syncNotesIcon,

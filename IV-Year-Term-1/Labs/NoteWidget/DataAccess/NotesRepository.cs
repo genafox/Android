@@ -18,16 +18,12 @@ namespace NoteWidget.DataAccess
                 NotesInterfaceConstants.Name
             };
 
-            var loader = new CursorLoader(
-                context,
+            using (var cursor = context.ContentResolver.Query(
                 uri,
                 projection,
                 selection: null,
                 selectionArgs: null,
-                sortOrder: null);
-
-            var cursor = loader.LoadInBackground() as ICursor;
-            if(cursor != null)
+                sortOrder: null))
             {
                 // If cursore is not empty
                 if (cursor.MoveToFirst())
@@ -42,8 +38,6 @@ namespace NoteWidget.DataAccess
                     } while (cursor.MoveToNext());
                 }
             }
-
-            cursor.Close();
 
             return notes;
         }

@@ -4,6 +4,7 @@ using NoteWidget.DataAccess;
 using System.Collections.Generic;
 using Android.OS;
 using IRemoteViewsFactory = Android.Widget.RemoteViewsService.IRemoteViewsFactory;
+using System;
 
 namespace NoteWidget.DataBinding
 {
@@ -17,7 +18,7 @@ namespace NoteWidget.DataBinding
         public NoteRemoteViewsFactory(Context context)
         {
             this.context = context;
-            this.notes = NotesRepository.Get(this.context);
+            this.notes = new List<NoteModel>();
         }
 
         public int Count => this.notes.Count;
@@ -63,6 +64,17 @@ namespace NoteWidget.DataBinding
 
         public void OnDataSetChanged()
         {
+            //this.notes = new List<NoteModel>();
+            //for(int i = 0; i < new Random().Next(1, 10); i++)
+            //{
+            //    this.notes.Add(new NoteModel { Id = i, Name = $"Note {i}" });
+            //}
+
+            this.notes.Clear();
+            foreach(NoteModel note in NotesRepository.Get(this.context))
+            {
+                this.notes.Add(note);
+            }
         }
 
         public void OnDestroy()
