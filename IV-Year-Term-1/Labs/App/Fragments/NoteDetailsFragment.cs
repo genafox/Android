@@ -85,7 +85,7 @@ namespace App.Fragments
             }
 
             var settings = this.dependencyResolver.Resolve<ISettingsService>().Get();
-            AppearanceHelper.ApplySettings(fragmentView, settings);
+            AppearanceHelper.ApplySettings(fragmentView, this.Activity.ApplicationContext, settings);
 
             return fragmentView;
         }

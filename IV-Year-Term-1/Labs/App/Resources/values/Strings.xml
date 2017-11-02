@@ -41,5 +41,6 @@
   <string name="dark_theme">Dark</string>
   <string name="font_settings">Font</string>
   <string name="font_size">Size: </string>
+  <string name="font_family">Family: </string>
   <string name="apply">Apply</string>
 </resources>

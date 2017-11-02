@@ -3,6 +3,8 @@ using Android.Views;
 using Android.Widget;
 using App.Domain;
 using Android.App;
+using Android.Graphics;
+using Android.Content;
 
 namespace App.Helpers
 {
@@ -12,21 +14,26 @@ namespace App.Helpers
         {
             ViewGroup root = activity.Window.DecorView.FindViewById<ViewGroup>(Android.Resource.Id.Content);
 
-            foreach (TextView control in GetViewsByType<TextView>(root))
-            {
-                control.TextSize = settings.FontSize;
-            }
+            ApplySettingsForControls(root, activity.ApplicationContext, settings);
         }
 
-        public static void ApplySettings(View view, SettingsModel settings)
+        public static void ApplySettings(View view, Context context, SettingsModel settings)
         {
             var rootView = view as ViewGroup;
             if(rootView != null)
             {
-                foreach (TextView control in GetViewsByType<TextView>(rootView))
-                {
-                    control.TextSize = settings.FontSize;
-                }
+                ApplySettingsForControls(rootView, context, settings);
+            }
+        }
+
+        private static void ApplySettingsForControls(ViewGroup rootView, Context context, SettingsModel settings)
+        {
+            foreach (TextView control in GetViewsByType<TextView>(rootView))
+            {
+                control.TextSize = settings.FontSize;
+
+                var font = Typeface.CreateFromAsset(context.Assets, settings.FontPath);
+                control.Typeface = font;
             }
         }
 

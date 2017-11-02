@@ -10,6 +10,7 @@ namespace App.Domain.Services
 
         private const string ThemeKey = "Theme";
         private const string FontSizeKey = "FontSize";
+        private const string FontPathKey = "FontPath";
 
         public SettingsModel Get()
         {
@@ -18,8 +19,9 @@ namespace App.Domain.Services
             {
                 int theme = settingsStorage.GetInt(ThemeKey, Resource.Style.MainTheme);
                 int fontSize = settingsStorage.GetInt(FontSizeKey, 14);
+                string fontPath = settingsStorage.GetString(FontPathKey, "Fonts/OpenSans-Regular.ttf");
 
-                settings = new SettingsModel(theme, fontSize);
+                settings = new SettingsModel(theme, fontSize, fontPath);
             }
 
             return settings;
@@ -33,6 +35,7 @@ namespace App.Domain.Services
                 {
                     editTransaction.PutInt(ThemeKey, model.Theme);
                     editTransaction.PutInt(FontSizeKey, model.FontSize);
+                    editTransaction.PutString(FontPathKey, model.FontPath);
 
                     editTransaction.Commit();
                 }

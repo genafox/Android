@@ -6,6 +6,8 @@ using Android.Support.V7.Widget;
 using App.Domain.Database.Models;
 using App.Helpers;
 using Uri = Android.Net.Uri;
+using App.IoC;
+using App.Domain.Interfaces;
 
 namespace App.DataBinding
 {
@@ -31,6 +33,12 @@ namespace App.DataBinding
             View itemView = LayoutInflater
                 .From(parent.Context)
                 .Inflate(Resource.Layout.Layout_NoteItem, parent, false);
+
+            using (var dr = new DependencyResolver())
+            {
+                var settings = dr.Resolve<ISettingsService>().Get();
+                AppearanceHelper.ApplySettings(itemView, parent.Context, settings);
+            }
 
             return new NoteAdapterViewHolder(itemView, this.OnClick, this.OnLongClick);
         }

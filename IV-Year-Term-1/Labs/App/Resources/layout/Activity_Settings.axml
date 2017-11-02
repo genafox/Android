@@ -43,9 +43,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <TextView
+            
+          <TextView
                 android:text="@string/font_size"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/fontSizeTextView"
                 android:paddingLeft="35dp"
@@ -57,6 +58,22 @@
                 android:max="36"
                 android:layout_marginLeft="20dp"
                 android:progress="14" />
+          
+          <TextView
+                android:text="@string/font_family"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fontFamilyTextView"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="35dp"
+                android:paddingTop="5dp" />
+          <Spinner
+                android:spinnerMode="dialog"
+                android:layout_marginTop="@dimen/non_text_input_top_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fontFamiliySpinner"
+                android:layout_marginLeft="28dp" />
         </LinearLayout>
     </LinearLayout>
     <Button
