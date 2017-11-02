@@ -22,6 +22,8 @@ using SupportFragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 using SupportFragment = Android.Support.V4.App.Fragment;
 using App.IoC;
+using App.Domain;
+using App.Helpers;
 
 namespace App.Activities
 {
@@ -50,10 +52,13 @@ namespace App.Activities
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState);
-
             this.dependencyResolver = new DependencyResolver();
             this.noteRepository = this.dependencyResolver.Resolve<INoteRepository>();
+            var settings = dependencyResolver.Resolve<ISettingsService>().Get();
+
+            this.SetTheme(settings.Theme);
+
+            base.OnCreate(savedInstanceState);
 
             this.SetContentView(Resource.Layout.Activity_Notes);
 
@@ -80,6 +85,9 @@ namespace App.Activities
             // Instantiate the layout manager:
             var layoutManager = new LinearLayoutManager(this);
             recyclerView.SetLayoutManager(layoutManager);
+
+            // Apply Appearance
+            AppearanceHelper.ApplySettings(this, settings);
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="2dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="12dp"
+            android:text="@string/creation_date"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginRight="5dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="10/10/2017"
+            android:id="@+id/detailsCreationDateTextView"
+            android:textSize="12dp"
+            android:textStyle="normal"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="12dp"
+            android:text="@string/expiration_date"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginRight="5dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="10/10/2017"
+            android:id="@+id/detailsExpirationDateTextView"
+            android:textSize="12dp"
+            android:textStyle="normal"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="fill"
+        android:text="Some description"
+        android:id="@+id/detailsDescriptionTextView"
+        android:textSize="12dp"
+        android:textStyle="normal"
+        android:textColor="@android:color/darker_gray"
+        android:paddingBottom="10dp" />
+</LinearLayout>

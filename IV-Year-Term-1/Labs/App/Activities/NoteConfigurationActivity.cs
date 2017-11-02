@@ -17,6 +17,8 @@ using App.Domain.Repositories;
 using Newtonsoft.Json;
 using Uri = Android.Net.Uri;
 using App.IoC;
+using App.Domain;
+using App.Helpers;
 
 namespace App.Activities
 {
@@ -63,11 +65,14 @@ namespace App.Activities
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState);
-
             this.noteData = new Note();
             this.dependencyResolver = new DependencyResolver();
             this.noteRepository = this.dependencyResolver.Resolve<INoteRepository>();
+            var settings = dependencyResolver.Resolve<ISettingsService>().Get();
+
+            this.SetTheme(settings.Theme);
+            
+            base.OnCreate(savedInstanceState);
 
             this.SetContentView(Resource.Layout.Activity_NoteConfiguration);
 
@@ -131,6 +136,9 @@ namespace App.Activities
                 this.noteExpirationDateInput.Text = this.noteData.ExpirationDate.ToString(ExpirationDateFormat);
                 this.noteDescriptionInput.Text = this.noteData.Description;
             }
+
+            // Apply Appearance
+            AppearanceHelper.ApplySettings(this, settings);
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)

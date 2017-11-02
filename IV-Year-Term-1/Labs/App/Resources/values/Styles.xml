@@ -1,7 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <!-- Inherit from the light Material Theme -->
+  <!-- Light Custom theme -->
   <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
+  </style>
+
+  <!-- Dark Custom theme -->
+  <style name="DarkMainTheme" parent="android:Theme.Material">
+    <!-- Override the app bar color -->
+    <item name="android:colorPrimary">@color/my_blue</item>
+    <!-- Override the color of UI controls -->
+    <item name="android:colorAccent">@color/my_purple</item>
   </style>
 
   <!-- Theme an individual view: -->

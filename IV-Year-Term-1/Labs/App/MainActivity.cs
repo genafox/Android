@@ -25,7 +25,8 @@ namespace App
         private Button colorPickerBtn;
         private Button calculatorBtn;
         private Button notesBtn;
-        
+        private Button settingsBtn;
+
         private Spinner languageSpinner;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -52,6 +53,13 @@ namespace App
             this.notesBtn = FindViewById<Button>(Resource.Id.notesBtn);
             notesBtn.Click += (sender, e) => {
                 var activity = new Intent(this, typeof(NotesActivity));
+                StartActivity(activity);
+            };
+
+            // Settings
+            this.settingsBtn = FindViewById<Button>(Resource.Id.settingsBtn);
+            settingsBtn.Click += (sender, e) => {
+                var activity = new Intent(this, typeof(SettingsActivity));
                 StartActivity(activity);
             };
 

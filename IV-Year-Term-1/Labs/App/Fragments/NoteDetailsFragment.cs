@@ -8,12 +8,17 @@ using App.Domain.Database.Models;
 using App.Helpers;
 using Newtonsoft.Json;
 using SupportFragment = Android.Support.V4.App.Fragment;
+using Android.Support.V4.App;
+using App.Domain.Interfaces;
+using App.IoC;
 
 namespace App.Fragments
 {
     public class NoteDetailsFragment : SupportFragment
     {
         private const string BundleNoteKey = "note_item";
+
+        private DependencyResolver dependencyResolver;
 
         private Note noteItem;
 
@@ -32,10 +37,12 @@ namespace App.Fragments
 
         public override void OnCreate(Bundle savedInstanceState)
         {
+            this.dependencyResolver = new DependencyResolver();
+
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
-            this.RetainInstance = true;
+            //this.RetainInstance = true;
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -77,6 +84,9 @@ namespace App.Fragments
                 }
             }
 
+            var settings = this.dependencyResolver.Resolve<ISettingsService>().Get();
+            AppearanceHelper.ApplySettings(fragmentView, settings);
+
             return fragmentView;
         }
 
@@ -86,6 +96,12 @@ namespace App.Fragments
 
             string jsonNote = JsonConvert.SerializeObject(this.noteItem);
             outState.PutString(BundleNoteKey, jsonNote);
+        }
+
+        public override void OnDestroy()
+        {
+            this.dependencyResolver.Dispose();
+            base.OnDestroy();
         }
     }
 }

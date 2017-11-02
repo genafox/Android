@@ -20,7 +20,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/choose_note_icon_label"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:id="@+id/noteIconLabel"/>
             <ImageView
                 android:src="@android:drawable/ic_menu_gallery"
                 android:layout_gravity="center"
@@ -72,7 +73,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/select_note_importance"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:id="@+id/noteImportanceLabel"/>
             <Spinner
                 android:spinnerMode="dialog"
                 android:layout_marginTop="@dimen/non_text_input_top_margin"

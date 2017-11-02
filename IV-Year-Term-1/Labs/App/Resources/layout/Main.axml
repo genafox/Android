@@ -27,6 +27,13 @@
         android:id="@+id/notesBtn"
         android:layout_margin="5.0dp"
         android:drawableLeft="@drawable/note_icon" />
+    <Button
+        android:text="@string/settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settingsBtn"
+        android:layout_margin="5.0dp"
+        android:drawableLeft="@drawable/settings_icon" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_marginTop="@dimen/non_text_input_group_top_margin"

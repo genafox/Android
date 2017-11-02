@@ -2,6 +2,9 @@
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using App.Helpers;
+using App.Domain.Interfaces;
+using App.IoC;
 
 namespace App.DataBinding
 {
@@ -36,6 +39,12 @@ namespace App.DataBinding
                 ItemView = itemView,
                 Position = this.AdapterPosition
             });
+
+            using (var dr = new DependencyResolver())
+            {
+                var settings = dr.Resolve<ISettingsService>().Get();
+                AppearanceHelper.ApplySettings(itemView, settings);
+            }
         }
     }
 }
