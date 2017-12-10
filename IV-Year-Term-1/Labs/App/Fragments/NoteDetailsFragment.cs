@@ -1,16 +1,13 @@
-﻿using System.IO;
-using Android.Graphics;
-using Android.Net;
+﻿using Android.Net;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
 using App.Domain.Database.Models;
 using App.Helpers;
 using Newtonsoft.Json;
-using SupportFragment = Android.Support.V4.App.Fragment;
-using Android.Support.V4.App;
 using App.Domain.Interfaces;
 using App.IoC;
+using SupportFragment = Android.Support.V4.App.Fragment;
 
 namespace App.Fragments
 {

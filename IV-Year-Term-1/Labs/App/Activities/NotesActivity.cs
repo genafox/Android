@@ -24,6 +24,8 @@ using SupportFragment = Android.Support.V4.App.Fragment;
 using App.IoC;
 using App.Domain;
 using App.Helpers;
+using System.Threading.Tasks;
+using Java.Lang;
 
 namespace App.Activities
 {
@@ -50,6 +52,8 @@ namespace App.Activities
         private SearchView searchView;
         private Spinner importanceFilterSpinner;
 
+        private ProgressBar progressBar;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             this.dependencyResolver = new DependencyResolver();
@@ -74,8 +78,7 @@ namespace App.Activities
             var recyclerView = this.FindViewById<RecyclerView>(Resource.Id.notesListRecyclerView);
 
             // Instantiate the adapter and pass in its data source:
-            var notes = new ObservableCollection<Note>(this.noteRepository.GetAll());
-            this.noteAdapter = new NoteAdapter(notes);
+            this.noteAdapter = new NoteAdapter(new ObservableCollection<Note>());
             this.noteAdapter.ItemClick += this.OnNoteClick;
             this.noteAdapter.ItemLongClick += this.OnNoteLongClick;
 
@@ -85,6 +88,16 @@ namespace App.Activities
             // Instantiate the layout manager:
             var layoutManager = new LinearLayoutManager(this);
             recyclerView.SetLayoutManager(layoutManager);
+
+            // Progress bar
+            this.progressBar = this.FindViewById<ProgressBar>(Resource.Id.notesProgresBar);
+
+            this.GetNotesAsync().ContinueWith(async getNotesTask =>
+            {
+                IEnumerable<Note> notes = await getNotesTask;
+                this.noteAdapter.SetData(new ObservableCollection<Note>(notes));
+            }, 
+            TaskScheduler.FromCurrentSynchronizationContext());
 
             // Apply Appearance
             AppearanceHelper.ApplySettings(this, settings);
@@ -115,8 +128,16 @@ namespace App.Activities
 
         private void NotifyNotesDataChanged(Note[] notes = null)
         {
-            notes = notes ?? this.noteRepository.GetAll().ToArray();
-            this.noteAdapter.SetData(new ObservableCollection<Note>(notes));
+            this.GetNotesAsync().ContinueWith(async notesTask =>
+            {
+                if(notes == null)
+                {
+                    notes = (await notesTask).ToArray();
+                }
+
+                this.noteAdapter.SetData(new ObservableCollection<Note>(notes));
+            }, 
+            TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void ToolbarOnMenuItemClick(object sender, SupportToolbar.MenuItemClickEventArgs menuItemClickEventArgs)
@@ -219,12 +240,15 @@ namespace App.Activities
             string nameFilter = this.searchView.Query;
             NoteImportance importanceFilter = this.noteImportanceSource[this.importanceFilterSpinner.SelectedItemPosition].Key;
 
-            IEnumerable<Note> filtered = this.noteRepository
-                .GetAll()
-                .Where(n => 
-                    n.Name.IndexOf(nameFilter, StringComparison.InvariantCultureIgnoreCase) >= 0
-                    && importanceFilter.HasFlag(n.Importance));
-            this.noteAdapter.SetData(new ObservableCollection<Note>(filtered));
+            this.GetNotesAsync().ContinueWith(async notesTask =>
+            {
+                IEnumerable<Note> filtered = (await notesTask)
+                    .Where(n =>
+                        n.Name.IndexOf(nameFilter, StringComparison.InvariantCultureIgnoreCase) >= 0
+                        && importanceFilter.HasFlag(n.Importance));
+                this.noteAdapter.SetData(new ObservableCollection<Note>(filtered));
+            },
+            TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void OnNoteClick(object sender, NoteAdapterClickEventArgs eventArgs)
@@ -305,6 +329,28 @@ namespace App.Activities
             fragmentTx.Commit();
 
             this.fragmentContainer.Visibility = ViewStates.Visible;
+        }
+
+        private async Task<IEnumerable<Note>> GetNotesAsync()
+        {
+            this.progressBar.Visibility = ViewStates.Visible;
+
+            await Task.Delay(2000);
+
+            var getNotesTask = Task.Factory.StartNew(() =>
+            {
+                return this.noteRepository.GetAll();
+            });
+
+            var hideProgressBarTask = await getNotesTask.ContinueWith(notes =>
+            {
+                this.progressBar.Visibility = ViewStates.Gone;
+
+                return notes;
+
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+
+            return await hideProgressBarTask;
         }
     }
 }
