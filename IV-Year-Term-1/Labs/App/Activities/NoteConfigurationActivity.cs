@@ -19,12 +19,15 @@ using Uri = Android.Net.Uri;
 using App.IoC;
 using App.Domain;
 using App.Helpers;
+using App.Receivers;
 
 namespace App.Activities
 {
     [Activity(Label = "@string/add_note", MainLauncher = false)]
     public class NoteConfigurationActivity : AppCompatActivity
     {
+        private Random random;
+
         private const string BundleNoteDataKey = "note_item_data";
         private const string ExpirationDateFormat = "dd/MM/yy hh:mm:ss";
         private const int SelectNoteIconRequestCode = 1;
@@ -65,6 +68,8 @@ namespace App.Activities
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            this.random = new Random();
+
             this.noteData = new Note();
             this.dependencyResolver = new DependencyResolver();
             this.noteRepository = this.dependencyResolver.Resolve<INoteRepository>();
@@ -234,6 +239,9 @@ namespace App.Activities
             try
             {
                 saveNoteAction(this.noteData);
+
+                this.ScheduleNotification(this.noteData);
+
                 this.SetResult(Result.Ok);
                 this.Finish();
             }
@@ -251,6 +259,24 @@ namespace App.Activities
         {
             inputLayout.SetErrorEnabled(true);
             inputLayout.SetError(string.Format(this.GetString(errorMessageId), messageParams));
+        }
+
+        private void ScheduleNotification(Note note)
+        {
+            string jsonNote = JsonConvert.SerializeObject(note);
+
+            Intent alarmIntent = new Intent(this, typeof(NoteNotificationReceiver));
+            alarmIntent.PutExtra(NoteNotificationReceiver.NoteKey, jsonNote);
+            var pendingIntent = PendingIntent.GetBroadcast(this, 0, alarmIntent, PendingIntentFlags.CancelCurrent);
+
+            AlarmManager manager = (AlarmManager)this.GetSystemService(Context.AlarmService);
+
+            Java.Util.Calendar calendar = Java.Util.Calendar.Instance;
+            calendar.TimeInMillis = Java.Lang.JavaSystem.CurrentTimeMillis();// + 10000;
+
+            DateTime alarmTime = note.ExpirationDate;
+            calendar.Set(alarmTime.Year, alarmTime.Month - 1, alarmTime.Day - 1, alarmTime.Hour, alarmTime.Minute, alarmTime.Second);
+            manager.SetRepeating(AlarmType.RtcWakeup, calendar.TimeInMillis, AlarmManager.IntervalDay, pendingIntent);
         }
     }
 }

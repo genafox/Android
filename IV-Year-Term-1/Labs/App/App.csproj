@@ -136,6 +136,7 @@
     <Compile Include="Domain\Database\Models\Note.cs" />
     <Compile Include="Domain\Database\Models\NoteImportance.cs" />
     <Compile Include="Activities\NotesActivity.cs" />
+    <Compile Include="Receivers\NoteNotificationReceiver.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
