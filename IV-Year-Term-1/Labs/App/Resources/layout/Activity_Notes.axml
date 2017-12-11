@@ -8,14 +8,13 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimary">
-    </android.support.v7.widget.Toolbar>
+        android:background="?attr/colorPrimary" />
     <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/notesProgresBar"
-            android:indeterminate="true"/>
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/notesProgresBar"
+        android:indeterminate="true" />
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"

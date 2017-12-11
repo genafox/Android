@@ -105,6 +105,7 @@
     <Compile Include="Activities\NoteConfigurationActivity.cs" />
     <Compile Include="Activities\CalculatorActivity.cs" />
     <Compile Include="Activities\ColorPickerActivity.cs" />
+    <Compile Include="Activities\NoteDetailsActivity.cs" />
     <Compile Include="Activities\SettingsActivity.cs" />
     <Compile Include="ContentProvidersApi\NotesProvider.cs" />
     <Compile Include="ContentProvidersApi\NotesDataSet.cs" />
@@ -187,6 +188,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout-land\Fragment_NoteDetails.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Activity_NoteDetails.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

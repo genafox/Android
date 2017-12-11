@@ -22,7 +22,7 @@ namespace App.Receivers
         private void ShowNotification(Note note, Context context)
         {
             // Set up an intent so that tapping the notifications returns to this app:
-            Intent notesActivityIntent = new Intent(context, typeof(NotesActivity));
+            Intent notesActivityIntent = NoteDetailsActivity.FromNote(note, context);
             notesActivityIntent.SetFlags(ActivityFlags.ClearTop);
 
             int pendingIntentId = 1;

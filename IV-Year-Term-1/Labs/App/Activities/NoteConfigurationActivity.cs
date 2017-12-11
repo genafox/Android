@@ -13,11 +13,9 @@ using Android.Widget;
 using App.Domain.Exceptions;
 using App.Domain.Interfaces;
 using App.Domain.Database.Models;
-using App.Domain.Repositories;
 using Newtonsoft.Json;
 using Uri = Android.Net.Uri;
 using App.IoC;
-using App.Domain;
 using App.Helpers;
 using App.Receivers;
 
