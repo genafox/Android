@@ -2,8 +2,8 @@
 
 namespace App.DataBinding
 {
-	public class NoteViewHolderClickEventArgs
-	{
+	public class ViewHolderClickEventArgs
+    {
 		public View ItemView { get; set; }
 
 		public int Position { get; set; }

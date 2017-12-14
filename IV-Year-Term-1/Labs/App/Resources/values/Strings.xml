@@ -5,6 +5,9 @@
   <string name="calculator_label">Calculator</string>
   <string name="notes_label">Notes</string>
   <string name="note_details">Note Details</string>
+  <string name="player_label">Player</string>
+  <string name="compas_label">Compas</string>
+  <string name="map_label">Map</string>
   <string name="search">Search</string>
   <string name="add_note">Add Note</string>
   <string name="edit_note">Edit Note</string>

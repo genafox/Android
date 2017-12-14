@@ -5,18 +5,18 @@ using Android.Views;
 using Android.Support.V7.Widget;
 using App.Domain.Database.Models;
 using App.Helpers;
-using Uri = Android.Net.Uri;
 using App.IoC;
 using App.Domain.Interfaces;
+using Uri = Android.Net.Uri;
 
-namespace App.DataBinding
+namespace App.DataBinding.Notes
 {
     public class NoteAdapter : RecyclerView.Adapter
     {
         private ObservableCollection<Note> notes;
 
-        public event EventHandler<NoteAdapterClickEventArgs> ItemClick;
-        public event EventHandler<NoteAdapterClickEventArgs> ItemLongClick;
+        public event EventHandler<AdapterClickEventArgs<Note>> ItemClick;
+        public event EventHandler<AdapterClickEventArgs<Note>> ItemLongClick;
 
         public NoteAdapter(ObservableCollection<Note> data)
         {
@@ -71,22 +71,22 @@ namespace App.DataBinding
             this.NotifyDataSetChanged();
         }
 
-        private void OnClick(NoteViewHolderClickEventArgs args)
+        private void OnClick(ViewHolderClickEventArgs args)
         {
-            this.ItemClick?.Invoke(this, new NoteAdapterClickEventArgs
+            this.ItemClick?.Invoke(this, new AdapterClickEventArgs<Note>
             {
                 ItemView = args.ItemView,
-                Note = this.notes[args.Position],
+                Item = this.notes[args.Position],
                 Position = args.Position
             });
         }
 
-        private void OnLongClick(NoteViewHolderClickEventArgs args)
+        private void OnLongClick(ViewHolderClickEventArgs args)
         {
-            this.ItemLongClick?.Invoke(this, new NoteAdapterClickEventArgs
+            this.ItemLongClick?.Invoke(this, new AdapterClickEventArgs<Note>
             {
                 ItemView = args.ItemView,
-                Note = this.notes[args.Position],
+                Item = this.notes[args.Position],
                 Position = args.Position
             });
         }

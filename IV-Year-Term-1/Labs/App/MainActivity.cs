@@ -25,6 +25,9 @@ namespace App
         private Button colorPickerBtn;
         private Button calculatorBtn;
         private Button notesBtn;
+        private Button playerBtn;
+        private Button compasBtn;
+        private Button mapBtn;
         private Button settingsBtn;
 
         private Spinner languageSpinner;
@@ -53,6 +56,27 @@ namespace App
             this.notesBtn = FindViewById<Button>(Resource.Id.notesBtn);
             notesBtn.Click += (sender, e) => {
                 var activity = new Intent(this, typeof(NotesActivity));
+                StartActivity(activity);
+            };
+
+            // Player
+            this.playerBtn = FindViewById<Button>(Resource.Id.playerBtn);
+            this.playerBtn.Click += (sender, e) => {
+                var activity = new Intent(this, typeof(PlayerActivity));
+                StartActivity(activity);
+            };
+
+            // Compas
+            this.compasBtn = FindViewById<Button>(Resource.Id.compasBtn);
+            this.compasBtn.Click += (sender, e) => {
+                var activity = new Intent(this, typeof(CompasActivity));
+                StartActivity(activity);
+            };
+
+            // Map
+            this.mapBtn = FindViewById<Button>(Resource.Id.mapBtn);
+            this.mapBtn.Click += (sender, e) => {
+                var activity = new Intent(this, typeof(MapActivity));
                 StartActivity(activity);
             };
 

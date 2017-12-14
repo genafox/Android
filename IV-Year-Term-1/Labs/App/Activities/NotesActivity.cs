@@ -11,21 +11,20 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-using App.DataBinding;
+using App.DataBinding.Notes;
 using App.Domain.Interfaces;
 using App.Domain.Database.Models;
 using App.Fragments;
+using App.IoC;
+using App.Helpers;
+using System.Threading.Tasks;
+using App.DataBinding;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 using PopupMenu = Android.Support.V7.Widget.PopupMenu;
 using SearchView = Android.Support.V7.Widget.SearchView;
 using SupportFragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 using SupportToolbar = Android.Support.V7.Widget.Toolbar;
 using SupportFragment = Android.Support.V4.App.Fragment;
-using App.IoC;
-using App.Domain;
-using App.Helpers;
-using System.Threading.Tasks;
-using Java.Lang;
 
 namespace App.Activities
 {
@@ -251,12 +250,12 @@ namespace App.Activities
             TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        private void OnNoteClick(object sender, NoteAdapterClickEventArgs eventArgs)
+        private void OnNoteClick(object sender, AdapterClickEventArgs<Note> eventArgs)
         {
-            this.ShowNoteDetailsFragment(eventArgs.Note);
+            this.ShowNoteDetailsFragment(eventArgs.Item);
         }
 
-        private void OnNoteLongClick(object sender, NoteAdapterClickEventArgs noteAdapterClickEventArgs)
+        private void OnNoteLongClick(object sender, AdapterClickEventArgs<Note> noteAdapterClickEventArgs)
         {
             var contextMenu = new PopupMenu(this, noteAdapterClickEventArgs.ItemView);
             contextMenu.Inflate(Resource.Menu.note_item_context_menu);
@@ -265,10 +264,10 @@ namespace App.Activities
                 switch (args.Item.ItemId)
                 {
                     case Resource.Id.edit_note_action:
-                        this.StartEditNoteActivity(noteAdapterClickEventArgs.Note);
+                        this.StartEditNoteActivity(noteAdapterClickEventArgs.Item);
                         break;
                     case Resource.Id.delete_note_action:
-                        this.StartDeleteNoteDialog(noteAdapterClickEventArgs.Note);
+                        this.StartDeleteNoteDialog(noteAdapterClickEventArgs.Item);
                         break;
                 }
             };

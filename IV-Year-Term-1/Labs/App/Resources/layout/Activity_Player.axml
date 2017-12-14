@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/songsListRecyclerView"
+        android:scrollbars="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:gravity="center_vertical"
+            android:text="Caption text"
+            android:id="@+id/currentSongTitleTextView"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+        <SeekBar
+            android:layout_width="fill_parent"
+            android:layout_height="15dp"
+            android:id="@+id/audioSeekBar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/repeatBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/repeat_icon"
+                android:padding="4dp" />
+            <ImageButton
+                android:id="@+id/previousTrackBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:src="@drawable/previousTrack_icon"
+                android:padding="2dp" />
+            <ImageButton
+                android:id="@+id/playPauseBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:src="@drawable/play_icon"
+                android:padding="2dp" />
+            <ImageButton
+                android:id="@+id/nextTrackBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:src="@drawable/nextTrack_icon"
+                android:padding="2dp" />
+            <ImageButton
+                android:id="@+id/shuffleBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/shuffle_icon"
+                android:padding="4dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
