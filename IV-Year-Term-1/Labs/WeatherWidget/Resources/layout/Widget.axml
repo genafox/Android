@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widgetBackground"
+    android:layout_width="288dip"
+    android:layout_height="272dip">
+    <RelativeLayout
+        android:layout_width="72dip"
+        android:layout_height="72dip">
+        <ImageView
+            android:layout_width="72dip"
+            android:layout_height="72dip"
+            android:id="@+id/widgetAnnouncementIcon"
+            android:src="@drawable/cloud_queue_icon" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/resultsTitleViewText"
+            android:text="Weather: Light Rain, Mist" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tempViewText"
+            android:text="Temperature: 7C" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/windViewText"
+            android:text="Wind Speed: 15 km/h" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/visibilityViewText"
+            android:text="Visibility: 3/10" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/humidityViewText"
+            android:text="Humidity: 93%" />
+    </LinearLayout>
+</LinearLayout>
